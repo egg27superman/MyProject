@@ -1,0 +1,53 @@
+﻿@model AFH.Barcaldine.Models.LoginModule
+@{
+    ViewBag.Title = "LoginPage";
+    Layout = "~/Views/shared/_LoginLayout.cshtml";
+}
+
+<div class="wrap">
+<div class="Services_content">
+	<div class="grid2">
+        <div class="contact_pic">
+            <img src="~/images/login_img.gif">
+        </div>
+        <div class="contact_form">
+            <h4>@Html.LabelFor(m => m.SignIn)</h4>
+             
+            
+          @using (Html.BeginForm("LoginPage", "Login", FormMethod.Post))
+            {
+                
+                @Html.AntiForgeryToken();
+                @Html.ValidationSummary(true);
+
+                                                            
+			    <table>
+			    <tr>
+                    <th>
+                        @Html.LabelFor(m => m.UserName)</th>
+                    <td>
+                        @Html.TextBoxFor(m => m.UserName,new { @class="aa"})
+                        @Html.ValidationMessage("FirstName","*")
+                        <br />
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </td>
+			    </tr>
+			    <tr>
+                    <th>@Html.LabelFor(m => m.PassWord)</th>
+                    <td>
+                        @Html.PasswordFor(m => m.PassWord)
+                        @Html.ValidationMessage("FamilyName","*")
+                        <br />
+                        @Html.ValidationMessageFor(m=>m.PassWord)
+                    </td>
+			    </tr>
+			   
+			    <tr><td colspan="2"><input type="submit" value="Login"></td></tr>
+			    </table>
+            }
+		    
+		</div>
+	</div>
+<div class="clear"></div>
+</div>
+</div>

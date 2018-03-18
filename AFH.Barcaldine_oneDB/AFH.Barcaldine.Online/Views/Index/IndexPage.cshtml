@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "IndexPage";
+}
+<br />
+<br />
+@*<br />*@
+<div class="wrap" id="content">
+        <div class="content content-type-page" id="cid-1">
+                      <div class="__front-tpl">
+  <div class="bottle-1"></div>
+  <article class="block block-1">
+
+    <h3>Welcome To</h3><br><h4>Barcaldine House</h4>
+    <div class="line"></div>
+    <div class="text">
+      <span style="font-weight: bold;">The land that Barcaldine Country House</span> is built on was purchased in 1998 and the then owners set about planning the lay out of the building site, gardens, vineyard and olive grove the house was completed 2001 the is approximately 70 squares. 
+    </div>
+    <a class="more" href="@Url.Action("HistoryPage","History")" title="Read more">Read more</a>
+
+  </article>
+
+  <article class="block block-2">
+    <h3>Rebecca Davern, <span>Chef</span></h3>
+    <div class="line"></div>
+    <div class="text">
+      Rebecca Davern has been working as a chef for 20 years. Working in a variety of restaurants  over the years from the fast-paced high volume, thru to the hatted fine dining. 
+    </div> 
+    <div class="portrait"></div>
+
+  </article>
+  
+  <section class="block news-block">
+    <article class="transition-05">
+  <div class="news-img">
+    <img src="~/images/news-1-1321357888.jpg" alt="Title of news" />
+    <div class="news-triangle"></div>
+  </div>
+  <div class="news-bg">
+    <h2>Title of news</h2>
+
+    <div class="news-text"><span style="font-weight: bold;">Nulla facilisi. </span>Nullam tristique vestibulum tellus, non ultrices nunc fringilla eu. Cras eleifend risus rhoncus arcu rhoncus vitae porttitor lorem semper.&nbsp; <br><br>Donec justo orci, malesuada eu suscipit eget, adipiscing ac risus. Morbi iaculis turpis non tortor rutrum cursus vitae sed massa. Nulla ultrices mollis neque quis ullamcorper. Curabitur dapibus porta luctus. Cras adipiscing sagittis ipsum a venenatis. <br></div>
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="news-img">
+    <img src="~/images/news2.jpg" alt="Another news" />
+    <div class="news-triangle"></div>
+
+  </div>
+  <div class="news-bg">
+    <h2>The Gardens</h2>
+    <div class="news-text"><span style="font-weight: bold;">Our extensive gardens</span>are surrounded by a wall of conifer hedges surrounding 3 seperate garden 'rooms'. All garden areas are easily accessed and present a myriad of uses, whether it be a private garden picnic for two or a large function with marquees and full catering. Imagine Santa arriving in a helicopter at your company or social club's next Christmas Party, or Product Launch in your own private garden.
+</div>
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="news-img">
+
+    <img src="~/images/news3.jpg" alt="News news news" />
+    <div class="news-triangle"></div>
+  </div>
+  <div class="news-bg">
+    <h2>Cellar Door</h2>
+    <div class="news-text"><span style="font-weight: bold;">Our cellar door</span> has a wide selection of wines produced by grapes grown or sourced by Barcaldine Country House. In addition to our wine we also offer Devonshire tea and light lunches from our resurant.
+The wines of
+                Barcaldine Country House
+We are open 10am to 5pm most days including public holidays. Please ring prior to arrival.
+Our cellar door is the closest available to Daylesford, just 8kms from the town center.
+</div>
+  </div>
+
+</article>
+<div class="inner_copyright">Collect from <a href="http://www.cssmoban.com/" target="_blank" title="��ҳģ��">��ҳģ��</a></div>
+<article class="transition-05">
+  <div class="news-img">
+    <img src="~/images/news4.jpg" alt="Even more news!" />
+    <div class="news-triangle"></div>
+  </div>
+  <div class="news-bg">
+    <h2>The Vineyard</h2>
+    <div class="news-text"><span style="font-weight: bold;">We have 2100 vines</span>growing at Barcaldine Country House, half Chardonnay, half Pinot Noir.
+Our wine is made off premises in Ballarat and the fruit we purchase to make our Cabernet Sauvignon, Shiraz, Merlot and Roseé are from north of the divide.
+Barcaldine Country House wines are available at many of the fine dining venues in the Daylesford and Hepburn region as well as selected restaurants around Melbourne.
+If you would like more information about Barcaldine wines please contact us. Enquiries from wholesalers are welcome.
+
+</div>
+  </div>
+
+</article>
+<div id="news-counter"></div>
+<script>
+(function($) {
+  var interval, timeout;
+  $(document).ready(function() {
+    $('section.news-block article').each(function() {
+      var _ = $('<div></div>').click(function() {
+        clearInterval(interval);
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          cont();
+        }, 5000);
+        show($(this));
+      });
+      $('#news-counter').append(_);
+    });
+    show($('#news-counter div:first'));
+    cont();
+  });
+  
+  function show(el) {
+    var i = $('#news-counter div').index(el);
+    $('section.news-block article.active').removeClass('active');
+    $('section.news-block article:eq('+i+')').addClass('active');
+    $('#news-counter div.active').removeClass('active');
+    el.addClass('active');
+  }
+  
+  function cont() {
+    interval = setInterval(function() {
+      var _ = $('#news-counter div.active').next();
+      if (_.length < 1) _ = $('#news-counter div:first');
+      show(_);
+    }, 5000);
+  }
+  
+  
+})(jQuery);
+</script>
+
+</section>
+  
+</div>
+                  </div>
+      </div>

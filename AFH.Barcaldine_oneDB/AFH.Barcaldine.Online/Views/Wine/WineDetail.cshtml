@@ -1,0 +1,195 @@
+﻿@model AFH.Barcaldine.Models.WineDetailModel
+@{
+    ViewBag.Title = "WineDetail";
+    
+}
+
+<div class="content content-type-page" id="cid-3">
+    <div class="wines-tpl">
+        <div id="wines-info" style="display: block;">
+
+            <div class="wines">
+                <div id="wine-info-2" class="wine-info transition-05 active">
+                    <h2>@Model.Describle.DescribleDetail.Name</h2>
+                    <h4>@Model.Describle.DescribleDetail.ShortIntro, @Model.ProductYear</h4>
+                    <div class="line"></div>
+                    <div class="price">$@Model.Price.ToString("#,###,###.00")</div>
+                    <div class="lbl">
+                        <label>Type:</label><span>@Model.WineCategoryName.English</span>
+                    </div>
+                    <div class="lbl">
+                        <label>Measure:</label><span>0.75</span>
+                    </div>
+                    <div class="lbl">
+                        <label>Region:</label><span>@Model.Region</span>
+                    </div>
+                    <div class="img"></div>
+                    @if (string.IsNullOrEmpty(Model.DetailPicture))
+                    {
+                        <div class="bottle-x" style="background-image: url('')"></div>
+                    }
+                    else
+                    {
+                        
+                    <div class="bottle-x" style="background-image: url('@Url.Content(Model.DetailPicture)')"></div>
+                    }
+                    <div class="desc"><span style="font-weight: bold;">@Model.Describle.DescribleDetail.Desc </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+            <div class="list">
+                <h2>All products <span>(@Model.Wines.Count.ToString())</span></h2>
+                @foreach (AFH.Barcaldine.Models.WineCategoryDetailModel winecategory in Model.Categorys)
+                {
+                    List<AFH.Barcaldine.Models.WineInfo> wineinfos = Model.Wines.FindAll(m => m.WineCategoryID == winecategory.WineCategoryID);
+                    if (winecategory.WineCategoryID == Model.WineCategoryID)
+                    {
+                        
+                        <h3 class="ul-active">@winecategory.WineCategoryName.English (@wineinfos.Count)</h3>
+                        <ul style="display: block;">
+                            @{                          
+                                foreach (AFH.Barcaldine.Models.WineInfo wineinfo in wineinfos)
+                                {
+                                    if (wineinfo.WineID == Model.WineID)
+                                    {
+                                        <li id="wine-list-1" class="active">@wineinfo.WineName</li>
+                                    }
+                                    else
+                                    {
+                                        <li id="wine-list-1"><a href="@Url.Action("WineDetail", new { id=@wineinfo.WineID})">@wineinfo.WineName</a></li>
+                                    }
+                                }
+                            }
+                        </ul>                    
+                    }
+                    else
+                    {
+                        <h3>@winecategory.WineCategoryName.English (@wineinfos.Count)</h3>
+                        <ul>
+                            @{
+                                foreach (AFH.Barcaldine.Models.WineInfo wineinfo in wineinfos)
+                                {
+                                    if (wineinfo.WineID == Model.WineID)
+                                    {
+                                        <li id="wine-list-1" class="active">@wineinfo.WineName</li>
+                                    }
+                                    else
+                                    {
+                                        <li id="wine-list-1"><a href="@Url.Action("WineDetail", new { id=@wineinfo.WineID})">@wineinfo.WineName</a></li>
+                                    }                                    
+
+                                }
+                            }
+                        </ul>            
+                    }
+                }
+            </div>
+            <div class="bottle"></div>
+            <a href="@Url.Action("WineOrder")" target="_blank"><div class="order"></div></a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    (function ($) {
+        $(document).ready(function () {
+            //$('#footer .white-footer').hide();
+            init();
+        });
+
+        function init() {
+            //alert(1);
+
+
+            //  var _ = '<ul>';
+            //  var __ = '';
+            //  var full = '';
+            //  for (var i in wines) {
+            //    _ += '<li id="wines-'+i+'"><h2>'+wines[i].name+'</h2>'+
+            //      '<div class="lbl"><label>Type:</label><span>'+wines[i].type+'</span></div>'+
+            //      '<div class="lbl"><label>Measure:</label><span>'+wines[i].measure+'</span></div>'+
+            //      '<div class="lbl"><label>Region:</label><span>'+wines[i].region+'</span></div>'+
+            //      '<div class="img"></div>'+
+            //      '<div class="line"></div>'+
+            //      '<div class="short-desc">'+wines[i].short_desc+'</div>'+
+            //      '<div class="price">$'+wines[i].price+'</div>'+
+            //      '<div class="footer"><a href="javascript:;">Add to cart</a></div>'+
+            //    '</li>';
+            //    __ += '<li id="wine-list-'+i+'">'+wines[i].name+', '+wines[i].region+'</li>';
+            //    full += '<div id="wine-info-'+i+'" class="wine-info transition-05"><h2>'+wines[i].name+'</h2><h4>'+wines[i].title+'</h4>'+
+            //      '<div class="line"></div>'+
+            //      '<div class="price">$'+wines[i].price+'</div>'+
+            //      '<div class="lbl"><label>Type:</label><span>'+wines[i].type+'</span></div>'+
+            //      '<div class="lbl"><label>Measure:</label><span>'+wines[i].measure+'</span></div>'+
+            //      '<div class="lbl"><label>Region:</label><span>'+wines[i].region+'</span></div>'+
+            //      '<div class="img"></div>'+
+            //      '<div class="bottle-x"></div>'+
+            //      '<div class="desc">'+wines[i].desc+'</div>'+
+            //    '</div>';
+            //  }
+            //  _ += '</ul>';
+            //  $('#wines-info ul').html(__);
+            //    $('#wines-info .wines').html(full);
+
+            //  $('#wines-list').html(_);
+            //  $('#wines-list li').click(function() {
+            //    random_fade();
+            //    var el = $(this);
+            //    setTimeout(function() {
+            //      $('#wines-info').fadeIn();
+            //      $('#footer .white-footer').fadeIn();
+            //      $('#wines-info .list #wine-list-'+el.attr('id').replace('wines-', '')+':first').trigger('click');
+            //    }, 1500) 
+            //  });
+
+            $('#wines-info h3').click(function () {
+                $('#wines-info h3.ul-active').removeClass('ul-active');
+                if ($(this).next().is(':visible')) { $('#wines-info ul').slideUp(); return; }
+                $('#wines-info ul').slideUp();
+                $(this).next().slideDown();
+                $(this).addClass('ul-active').slideDown();
+                //wine category picture todo
+                //if ($('h3').index($(this)) == 0) $('#wines-info').removeClass('white-wine').removeClass('white-champagne');
+                //if ($('h3').index($(this)) == 1) $('#wines-info').addClass('white-wine').removeClass('white-champagne');
+                //if ($('h3').index($(this)) == 2) $('#wines-info').addClass('white-champagne').removeClass('white-wine');
+            });
+
+
+            //  $('#wines-info .controls .prev').click(function() {
+            //    var el = $('#wines-info .list li.active').prev();
+            //    if (el.length < 1) el = $('#wines-info .list li.active').parent().find('li').last();
+            //    el.trigger('click');    
+            //  });
+            //  $('#wines-info .controls .next').click(function() {
+            //    var el = $('#wines-info .list li.active').next();
+            //    if (el.length < 1) el = $('#wines-info .list li.active').parent().find('li').first();
+            //    el.trigger('click');    
+            //  });
+            //  $('#wines-info .list li').click(function() {
+            //    $('#wines-info .list li.active').removeClass('active');
+            //    $(this).addClass('active');
+            //    show($(this).attr('id').replace('wine-list-', ''));
+            //  });
+            //}
+
+            //function show(n) {
+            //  $('#wines-info .wines .active').removeClass('active');
+            //  $('#wines-info #wine-info-'+n).addClass('active');
+            //}
+
+            //function random_fade() {
+            //  $('#wines-list li').each(function() {
+            //    var el = $(this);
+            //    setTimeout(function() {
+            //      el.css('opacity', 1).animate({ 'opacity': 0}, rnd(300, 1000));
+            //    }, rnd(0, 700));
+            //  });
+        }
+
+        //function rnd(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    })(jQuery)
+</script>

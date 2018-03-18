@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "_AdminLayout";
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="header_top">
+        <div class="wrap">
+            <div class="logo">
+                <a href="#">
+                    <img src="~/images/barlogo.png" alt="" /></a>
+            </div>
+            <div class="loginMenu">
+                <p>Hello,  @AFH.Barcaldine.Common.LoginVariable.UserName</p>
+                <ul>
+                    <li>@Html.ActionLink("Change Password", "UserChangePassword", "UserAdmin") |</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="Content">
+            <div id="Menu" class="Menu">
+                <ul>
+                    <li>@Html.ActionLink("News Admin", "NewsList", "NewsAdmin")</li>
+                    <li>@Html.ActionLink("Contact Report", "ContactReport", "Contact")</li>
+                    <li>@Html.ActionLink("User Admin", "UserList", "UserAdmin")</li>
+                </ul>
+            </div>
+            <div class="menuclear"></div>
+            <div class="MainContent">@RenderBody()</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="wrap">
+            <div class="footer_nav">
+            </div>
+            <div class="copy_right">
+                <p>@*@Models.Common.GetLangString("CopyRight")*@</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+</html>

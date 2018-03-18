@@ -1,0 +1,407 @@
+﻿@model AFH.Barcaldine.Models.WineOrderModel
+
+@{
+    ViewBag.Title = "Wine Order";
+}
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $("#btnSubmit").button();
+        $("#overlay").hide();
+
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy'
+        }).val();
+
+        InitPrice();
+
+        $("input[name=ProcessType]:radio").change(function () {
+            if ($(this).val() == "0") {
+                $("#tblPayment").show();
+            }
+            else {
+                $("#tblPayment").hide();
+            }
+        })
+
+        if ($("#rdoOnline").attr("checked") == 'checked') {
+            $("#tblPayment").show();
+        }
+        else {
+            $("#tblPayment").hide();
+        }
+
+        $("#creditcard1").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard2").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard3").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard4").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#cvvno").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+
+        //var isForward = (location.search.indexOf('forward=1') == -1);
+        //alert(isForward);
+        ////alert(location.search.indexOf('forward=1'));
+        //if (isForward) {
+        //    location = (location.href + (location.search.indexOf('?') == -1 ? '?' : '&') + 'forward=1');
+        //}
+
+
+
+    })
+
+    function ShowOverlay() {
+        var overlay = $('<div id="overlay"></div>');
+        overlay.appendTo(document.body);
+    }
+
+    function InitPrice() {
+        var lstBottle = $('input[class="bottles"]');
+        var lstPrice = $('input[class="price"]');
+        var lstTotPrice = $('input[class="totprice"]');
+
+        for (var i = 0; i < lstBottle.length; i++) {
+
+            var total = lstBottle[i].value * lstPrice[i].value;
+            lstTotPrice[i].value = formatFloat(total, 2);
+
+        }
+
+        var ProcessType = $("input[name=ProcessType]:radio");
+        if (ProcessType.val() == "0") {
+            $("#tblPayment").show();
+        }
+        else {
+            $("#tblPayment").hide();
+        }
+
+        GetShipping();
+    }
+
+    function GetShipping() {
+        
+        var state = $("#state").val();
+
+        var shippingInfo = $("#ShippingInfo").val();
+
+        var jsonShipping = $.parseJSON(shippingInfo);
+
+        $.each(jsonShipping, function (i, n)
+        {
+            if (state == n.State) {
+                $("#Shipping").val(n.ShippingRate);
+            }
+        })
+
+        RunTotal();
+    }
+
+
+
+</script>
+
+<div class="content content-type-page" id="cid-3">
+    <div class="wines-tpl">
+
+        @if (Model.ResultStatus == 2 || Model.ResultStatus == 3)
+        {
+                
+            <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                <p>
+                    <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                    <strong>Error:</strong> @Model.ResultMsg
+                </p>
+            </div>                
+        }
+
+        <br />
+        <div class="headtitle">
+            <h4>Barcaldine Country House - Wine Orders<br>
+            </h4>
+        </div>
+
+        <div class="text">
+            <span style="font-weight: bold;">Barcaldine Country House presently has the following wines available. Delivery can be arranged throughout Melbourne, Victoria and beyond.</span>
+        </div>
+
+
+        @using (Html.BeginForm("WineOrder", "Wine", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            
+            
+            @Html.HiddenFor(m => m.ShippingInfo, new { @id="ShippingInfo"})
+
+            <div class="order_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vintage</th>
+                            <th>Bottle(750ml)<br />
+                            </th>
+
+                            <th># Bottles</th>
+                            <th>Price</th>
+
+                        </tr>
+                    </thead>
+
+                    @for (int i = 0; i < Model.Wines.Count; i++)
+                    {
+                        AFH.Barcaldine.Models.WineListModel wine = Model.Wines[i];
+                        <tr>
+                            @Html.HiddenFor(m => m.Wines[i].WineID)
+                            @Html.HiddenFor(m => m.Wines[i].ProductYear)
+                            @Html.HiddenFor(m => m.Wines[i].WineName)
+
+                            <td>@wine.ProductYear - @wine.WineName</td>
+                            <td>$@wine.Price.ToString("#,###,###.00")
+                                @Html.HiddenFor(m => m.Wines[i].Price, new { @id = "p" + wine.WineID, @class = "price" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.Wines[i].Bottle, null, new { @class = "bottles", @size = "5", @id = 'c' + wine.WineID.ToString(), @onkeyup = "Calculate(this.id,'" + @wine.Price + "','" + wine.WineID.ToString() + "');", @maxlength="6" })
+                            </td>
+                            <td>
+                                <input disabled="disabled" name="totprice"
+                                    class="totprice" id="@(wine.WineID.ToString())" size="8" 
+                                    type="text" value="0">
+                            </td>
+
+                        </tr>                    
+                    }
+                    <tr>
+                        <td style="height: 30px;">&nbsp;</td>
+
+                        <td>&nbsp;</td>
+                        <td>SHIPPING:</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Shipping, null, new { @readonly="readonly" , @size="8", @Style="background-color: #EBEBE4; border: 1px solid gray; color:#545454; padding: 1px 0px;"})
+                    </tr>
+
+                    <tr>
+                        <td style="height: 30px;">&nbsp;</td>
+
+                        <td>&nbsp;</td>
+                        <td>TOTAL:</td>
+                        <td>
+                            <input readonly="readonly" name="total" Style="background-color: #EBEBE4; border: 1px solid gray; color:#545454; padding: 1px 0px;"
+                                id="total" class="for mfields" size="8" value=""
+                                type="text"></td>
+                    </tr>
+
+                </table>
+            </div>            
+            
+            <div class="delivery_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="height: 20px; padding-top: 10px; vertical-align: top;" colspan="4"><span
+                                style="font-weight: bold">Delivery Details</span></td>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td class="">Name</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Delivery.Name, null, new { @style = "width:500px", @maxlength="250" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Birthday</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Delivery.Birthday, null, new { @class = "datepicker", @maxlength="10" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.Birthday)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Address</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Delivery.Address, null, new { @style = "width:500px", @maxlength="250"  })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.Address)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td>
+                            @Html.DropDownListFor(m => m.Delivery.State, Model.Delivery.GetStateList(), null, new { @style = "width:100px", @onchange="GetShipping()", @id="state"})
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.State)
+                        </td>
+
+                        <td>Post Code</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Delivery.PostCode, null, new { @maxlength="10" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.PostCode)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="">Phone</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Delivery.Phone, null, new { @maxlength="50" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.Phone)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Email</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Delivery.Email, null, new { @maxlength="200" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Delivery.Email)
+                        </td>
+                    </tr>
+
+                </table>
+                <br />
+                <br />
+            </div>
+            
+            <div class="delivery_table">
+                @*@Html.HiddenFor(m => m.ProcessType)*@
+                <p style="font-size:16px">@Html.RadioButtonFor(m => m.ProcessType, 0, new { @name = "rdoOnline", @id="rdoOnline" }) Pay the order directly</p>
+                <br />
+                <p style="font-size:16px">@Html.RadioButtonFor(m => m.ProcessType, 1, new { @name = "rdoOffline", @id="rdoOffline" }) Pay the order with our staff assistant</p>
+                <br />
+                <table id="tblPayment">
+                    <thead>
+                        <tr>
+                            <td style="height: 20px; padding-top: 10px; vertical-align: top;" colspan="2"><span
+                                style="font-weight: bold">Payment Details</span></td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="2">
+                            <img src="~/Images/iconCreditcards.gif" /></td>
+                    </tr>
+                    <tr>
+                        <td width="25%">Credit Card Number
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Payment.creditCard1, null, new { @size = "4", @maxLength = "4", @id="creditcard1" })
+                            @Html.TextBoxFor(m => m.Payment.creditCard2, null, new { @size = "4", @maxLength = "4", @id="creditcard2"  })
+                            @Html.TextBoxFor(m => m.Payment.creditCard3, null, new { @size = "4", @maxLength = "4", @id="creditcard3"  })
+                            @Html.TextBoxFor(m => m.Payment.creditCard4, null, new { @size = "4", @maxLength = "4", @id="creditcard4"  })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Payment.creditCard1)
+                            @Html.ValidationMessageFor(m => m.Payment.creditCard2)
+                            @Html.ValidationMessageFor(m => m.Payment.creditCard3)
+                            @Html.ValidationMessageFor(m => m.Payment.creditCard4)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Expiry Date
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.Payment.ExpiryMonth, Model.Payment.GetMonth())
+                            @Html.DropDownListFor(m => m.Payment.ExpiryYear, Model.Payment.GetYear())
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Payment.ExpiryMonth)
+                            @Html.ValidationMessageFor(m => m.Payment.ExpiryYear)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Card security code</td>
+                        <td>@Html.TextBoxFor(m => m.Payment.CVV, null, new { @size = "3", @maxLength = "3", @id="cvvno" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Payment.CVV)
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+            <br>
+            <br />            
+            <input name="Submit" id="btnSubmit" value="Submit" onclick="ShowOverlay()"
+                type="submit">
+            <br>
+
+
+            <br>      
+ 
+        }
+    </div>
+
+
+
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+
+    function Calculate(bottles, price, obj) {
+        var bottlesValue = $("#" + bottles).val();
+        if (bottlesValue == "") {
+            var total = bottlesValue * price;
+            document.getElementById(obj).value = formatFloat(total,2);
+            RunTotal();
+            return true;
+        }
+        else if ((/^(\+|-)?\d+$/.test(bottlesValue)) && bottlesValue >= 0) {
+            var total = bottlesValue * price;
+            document.getElementById(obj).value = formatFloat(total,2);
+            RunTotal();
+            return true;
+        }
+        else {
+            $("#" + bottles).val("");
+            return false;
+        }
+    }
+
+
+
+    function RunTotal() {
+        var GrandTotal = 0;
+        var lstPrice = $('input[class="totprice"]');
+
+        for (var i = 0; i < lstPrice.length; i++) {
+            GrandTotal += parseFloat(lstPrice[i].value);
+        }
+
+        var shipping = $('#Shipping').val();
+        
+        GrandTotal = GrandTotal + parseFloat(shipping);
+        
+        $("#total").val(formatFloat(GrandTotal, 2));
+
+    }
+
+
+</script>

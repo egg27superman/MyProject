@@ -1,0 +1,202 @@
+﻿@model AFH.Barcaldine.Models.RatePolicyDetailModel
+
+@{
+    ViewBag.Title = "PricePolicyDetail";
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#roomtype").buttonset();
+        $("#btnSave").button();
+        $("#btnReturn").button();
+
+        $("input[name='weekdays']").change(function () {
+            var id_array = new Array();
+            $('input[name="weekdays"]:checked').each(function () {
+                id_array.push($(this).val());
+            });
+            var idstr = id_array.join(',');
+            $("#hiddenWeekdays").val(idstr);
+        });
+
+        $("input[name='discountrate']").change(function () {
+            var id_array = new Array();
+            $('input[name="discountrate"]:checked').each(function () {
+                id_array.push($(this).val());
+            });
+            var idstr = id_array.join(',');
+            $("#hiddenDiscountRate").val(idstr);
+        });
+
+    })
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+
+            @using (Html.BeginForm("RatePolicyDetail", "RoomRate", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.RoomPolicyID);   
+                @Html.HiddenFor(m => m.OpertationStatus);
+
+                <div class="pricepolicy">
+                    <p>Date:&nbsp;&nbsp;@Html.TextBoxFor(m => m.StartDate, null, new { @class = "datepicker" }) ~  @Html.TextBoxFor(m => m.EndDate, null, new { @class = "datepicker" })</p>
+                    @Html.ValidationMessageFor(m => m.StartDate)
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </div>
+                <div id="roomtype">
+                    <p>
+                        Room Type:&nbsp;&nbsp;@Html.RadioButtonFor(m => m.RoomType, 0, new { @name = "roomtype", @id = "rdoKing" })<label for="rdoKing">King</label>
+                        @Html.RadioButtonFor(m => m.RoomType, 1, new { @name = "roomtype", @id = "rdoQueen" })<label for="rdoQueen">Queen</label>
+                    </p>
+                    @Html.ValidationMessageFor(m => m.RoomType)
+                </div>
+                <div class="pricepolicy_column">
+                    @Html.HiddenFor(m => m.WeekDays, new { @id = "hiddenWeekdays" })
+                    <p>Choose Weekdays</p>
+                    <p>@Html.ValidationMessageFor(m => m.WeekDays)</p>
+
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("1"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="1" checked="checked" />Monday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="1" />Monday
+                        </p>
+                    }
+
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("2"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="2" checked="checked" />Tuesday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="2" />Tuesday
+                        </p>
+                    }
+
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("3"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="3" checked="checked" />Wednesday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="3" />Wednesday
+                        </p>
+                    }
+
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("4"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="4" checked="checked" />Thursday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="4" />Thursday
+                        </p>
+                    }
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("5"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="5" checked="checked" />Firday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="5" />Firday
+                        </p>
+                    }
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("6"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="6" checked="checked" />Saturday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="6" />Saturday
+                        </p>
+                    }
+
+                    @if (Model.WeekDays != null && Model.WeekDays.Contains("0"))
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="0" checked="checked" />Sunday
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <input type="checkbox" name="weekdays" value="0" />Sunday
+                        </p>
+                    }
+
+
+                </div>
+                <div class="pricepolicy_column">
+                    <p>Choose Basic Rate</p>
+                    <p>@Html.ValidationMessageFor(m => m.BasicRate)</p>
+                    @for (int i = 0; i < Model.BasicRateList.Count; i++)
+                    {
+                        <p>@Html.RadioButtonFor(m => m.BasicRate, Model.BasicRateList[i].RoomRateID, new { @name = "rdoBasic" })&nbsp;&nbsp;@Model.BasicRateList[i].RateName:&nbsp;$@Model.BasicRateList[i].BasicRate</p>
+                    }
+                </div>
+                <div class="pricepolicy_column">
+                    @Html.HiddenFor(m => m.DiscountRate, new { @id = "hiddenDiscountRate" })
+                    <p>Choose Discount Rate</p>
+                    <p>@Html.ValidationMessageFor(m => m.DiscountRate)</p>
+                    @for (int i = 0; i < Model.DiscountRateList.Count; i++)
+                    {
+                        if (Model.DiscountRate !=null && Model.DiscountRate.Contains(Model.DiscountRateList[i].RoomRateID.ToString()))
+                        {
+                            <p>
+                                <input type="checkbox" name="discountrate" value="@Model.DiscountRateList[i].RoomRateID" checked="checked"/>
+                                &nbsp;&nbsp;@Model.DiscountRateList[i].RateName:
+                                            &nbsp;@Model.DiscountRateList[i].DiscountDays&nbsp;Days
+                                            &nbsp;@(Model.DiscountRateList[i].DiscountRate * 100)&nbsp;%
+                            </p>                            
+                        }
+                        else
+                        {
+                            <p>
+                                <input type="checkbox" name="discountrate" value="@Model.DiscountRateList[i].RoomRateID"/>
+                                &nbsp;&nbsp;@Model.DiscountRateList[i].RateName:
+                                            &nbsp;@Model.DiscountRateList[i].DiscountDays&nbsp;Days
+                                            &nbsp;@(Model.DiscountRateList[i].DiscountRate * 100)&nbsp;%
+                            </p>
+                        }
+                    }
+                </div>
+                <div class="pricepolicy">
+                    @*<p>该政策是否删除 <input type="checkbox" /> </p>*@
+                </div>
+                <div class="pricepolicy" style="text-align: center">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Save" id="btnSave" />
+                    <button type="button" onclick="window.location.href='@Url.Action("RatePolicyList")'" id="btnReturn" >Return</button>
+                </div>                
+            }
+
+        </div>
+    </div>
+</div>

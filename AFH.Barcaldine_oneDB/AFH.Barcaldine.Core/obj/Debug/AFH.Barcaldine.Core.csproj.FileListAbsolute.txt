@@ -1,0 +1,66 @@
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.DataBaseAccess.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Security.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Serializer.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\itextsharp.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\itextsharp.pdfa.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\itextsharp.xmlworker.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\Payflow_dotNET.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.DataBaseAccess.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.DataBaseAccess.xml
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Security.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Security.xml
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Serializer.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Serializer.xml
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.csprojResolveAssemblyReference.cache
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\itextsharp.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\itextsharp.pdfa.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\itextsharp.xmlworker.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\Payflow_dotNET.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.DataBaseAccess.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.DataBaseAccess.xml
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Security.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Security.xml
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Serializer.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\bin\Debug\AFH.Common.Serializer.xml
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.csprojResolveAssemblyReference.cache
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Core.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\itextsharp.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\itextsharp.pdfa.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\itextsharp.xmlworker.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\Payflow_dotNET.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Common.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\AFH.Barcaldine.Models.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.csprojResolveAssemblyReference.cache
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\obj\Debug\AFH.Barcaldine.Core.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.Mvc.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.Razor.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.Mvc.xml
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.Razor.xml
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.xml
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Core\bin\Debug\System.Web.WebPages.Deployment.xml

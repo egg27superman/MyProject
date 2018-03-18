@@ -1,0 +1,64 @@
+﻿@model AFH.Barcaldine.Models.ShippingListModel
+
+@{
+    ViewBag.Title = "ShippingList";
+}
+
+@*<h2>ShippingList</h2>*@
+<script>
+    $(function () {
+        $("#btnSearch").button();
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("ShippingList", "Wine", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            <p>State: </p>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ShippingSearch.State, Model.ShippingSearch.GetStateList(), null, new { @style = "width:200px" })
+                        </td>
+                        <td>
+                            <p>Is Delete: </p>
+                        </td>
+                        <td>@Html.DropDownListFor(m => m.ShippingSearch.IsDelete, Model.ShippingSearch.GetIsDeleteSelectList())</td>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+                    </tr>
+                </table>
+            }
+
+            <br />
+            @Html.ActionLink("ADD New Shipping Rate", "ShippingDetail", "Wine", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add, id = string.Empty }, null)
+
+
+            <table class="tableClass">
+                <tr>
+                    <th>Shipping ID</th>
+                    <th>State</th>
+                    <th>Rate</th>
+                    <th>Is Delete</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.ShippingResultModel myModel in Model.ShippingResult)
+                {
+                    <tr>
+                        <td>@myModel.ShippingID</td>
+                        <td>@myModel.State</td>
+                        <td>@myModel.ShippingRate</td>
+
+                        <td>@myModel.IsDelete</td>
+                        <td>@Html.ActionLink("Update", "ShippingDetail", "Wine", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update, id = myModel.ShippingID }, null)</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "HistoryPage";
+}
+
+<div class="wrap" id="content">
+        <div class="content content-type-page" id="cid-2">
+                      <div class="tradition-tpl">
+  <div class="bottle-1"></div>
+  <article class="block block-1">
+
+    <h1>General HISTORY</h1>
+    <div class="text"><span style="font-weight: bold;">The land that Barcaldine Country House</span>is built on was purchased in 1998 and the then owners set about planning the lay out of the building site, gardens, vineyard and olive grove the house was completed 2001 the is approximately 70 squares. <br><br>Before the discovery of gold, the Daylesford area was heavily timbered, with open country to the north home of the Dja Dja Wuurong people. In the 1840's squatters took up large tracts of land and the Government appointed an Aboriginal Protector, Edward Stone Parker, who took up residence near Mt Franklin. <br><hr style="width: 100%; height: 2px;"><span style="color: #c41919;">The centre of Daylesford in the 1850's was Wombat Flat</span>, later covered by Lake Daylesford, but in the 1860's the focus shifted to Vincent Street - as the dates of the main buildings indicate. Gold was the main reason the town was founded, but saw-milling and agriculture played their part after the easily found gold was exhausted.<br><br>The mines had an insatiable appetite for timber, both for props and fueling steam engines. Many timber mills were erected in the surrounding forest. <br></div>
+    <div class="triangle"></div>
+  </article>
+
+  <section class="block iota-block">
+    <div id="iota-labels"></div>
+<article class="transition-05">
+  <div class="left">
+    <img src="../images/1970-1321358556.jpg" alt="specific period" />
+  </div>
+  <div class="right">
+    <div class="text">
+      <h2>specific period</h2>
+
+      Donec justo orci, malesuada eu suscipit eget, adipiscing ac risus. Morbi iaculis turpis non tortor rutrum cursus vitae sed massa. Nulla ultrices mollis neque quis ullamcorper. Curabitur dapibus porta luctus. <br><br><span style="font-weight: bold;">Morbi a dui id sem iaculis</span> ultrices tempor ut justo. Donec tortor diam, auctor sed tempus a, ultricies eu diam. Phasellus ornare lectus id odio pulvinar sed ornare urna pulvinar. <br>
+    </div>
+    <label>1970</label>
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="left">
+
+    <img src="../images/period2.jpg" alt="Another period" />
+  </div>
+  <div class="right">
+    <div class="text">
+      <h2>Another period</h2>
+      Morbi et posuere est. <span style="font-weight: bold;">Nulla ac ligula</span> eu nulla mattis imperdiet tempus a
+ diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+ cubilia Curae; <br><br>Phasellus eget libero ante, non dapibus augue. Nam 
+auctor dignissim vehicula. In ac libero nec tortor adipiscing eleifend 
+eget eget turpis. Pellentesque pretium magna volutpat.
+
+    </div>
+
+    <label>1980</label>
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="left">
+    <img src="../images/period3.jpg" alt="One more period" />
+  </div>
+  <div class="right">
+    <div class="text">
+
+      <h2>One more period</h2>
+      <span style="font-weight: bold;">Praesent risus metus</span>, ultrices et euismod nec, rutrum in felis. Donec eu
+ ante tellus. Maecenas nec tortor lacus, eu mollis libero. Aliquam erat 
+volutpat. Donec vel sapien erat. <br>Nulla bibendum, ante ac dignissim 
+imperdiet, neque lectus malesuada diam, a tincidunt lorem velit eu 
+nulla. Nulla porta dapibus aliquam. Donec vulputate erat eget neque 
+condimentum sed faucibus magna fringilla. Fusce metus.
+
+    </div>
+    <label>1990</label>
+  </div>
+
+</article>
+<script>
+(function($) {
+  var interval, timeout;
+  $(document).ready(function() {
+    $('section.iota-block article').each(function() {
+      var _ = $('<label>'+$(this).find('label').html()+'</label>').click(function() {
+        clearInterval(interval);
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          cont();
+        }, 5000);
+        show($(this));
+      });
+      $('#iota-labels').append(_);
+      $('#iota-labels').append('<span>&nbsp;-&nbsp;</span>');
+    });
+    show($('#iota-labels label:first'));
+    cont();
+  });
+  
+  function show(el) {
+    var i = $('#iota-labels label').index(el);
+    $('section.iota-block article.active').removeClass('active');
+    $('section.iota-block article:eq('+i+')').addClass('active');
+    $('#iota-labels label.active').removeClass('active');
+    el.addClass('active');
+  }
+  
+  function cont() {
+    clearInterval(interval);
+    interval = setInterval(function() {
+      var _ = $('#iota-labels label.active').next().next();
+      if (_.length < 1) _ = $('#iota-labels label:first');
+      show(_);
+    }, 5000);
+  }
+  
+  
+})(jQuery);
+</script>
+
+  </section>
+  
+</div>
+                  </div>
+      </div>

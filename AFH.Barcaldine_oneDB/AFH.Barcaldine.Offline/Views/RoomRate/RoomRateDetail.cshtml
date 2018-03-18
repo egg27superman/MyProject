@@ -1,0 +1,124 @@
+﻿@model AFH.Barcaldine.Models.RoomRateDetailModel
+@{
+    ViewBag.Title = "PriceDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#pricetype").buttonset();
+        $("#btnSave").button();
+        $("#btnReturn").button();
+
+        //$("#divDiscount").hide();
+        $("#rdoBasic").click(function () {
+            $("#divBasic").show();
+            $("#divDiscount").hide();
+        });
+        $("#rdoDiscount").click(function () {
+            $("#divBasic").hide();
+            $("#divDiscount").show();
+        });
+    })
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("RoomRateDetail", "RoomRate", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.RoomRateID);   
+                @Html.HiddenFor(m => m.OpertationStatus);     
+
+
+                <table>
+                    <tr>
+                        <th>Room Rate Name:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.RateName, null, new { @style = "width: 78%" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>Rate Type</th>
+                        <td>
+                            <div id="pricetype">
+                                <p>
+                                    @Html.RadioButtonFor(m => m.RateType, 0, new { @name = "pricetype", @id = "rdoBasic", @checked = "checked" })<label for="rdoBasic">Basic Rate</label>
+                                    @Html.RadioButtonFor(m => m.RateType, 1, new { @name = "pricetype", @id = "rdoDiscount" })<label for="rdoDiscount">Discount Rate</label>*
+                                </p>
+                            </div>
+                            @if (Model.RateType == 0)
+                            {
+                                <div id="divBasic">
+                                    <p>$&nbsp;@Html.TextBoxFor(m => m.BasicRate)<br />
+                                    @Html.ValidationMessageFor(m=>m.BasicRate)</p>
+                                </div>
+                                <div id="divDiscount" style="display: none;">
+                                    <p>
+                                        @Html.TextBoxFor(m => m.DiscountDays)&nbsp;Days
+                                        <br />
+                                        @Html.ValidationMessageFor(m=>m.DiscountDays)
+                                    </p>
+                                    <p>
+                                        @Html.TextBoxFor(m => m.DiscountRate)&nbsp;%
+                                        <br />
+                                        @Html.ValidationMessageFor(m=>m.DiscountRate)
+                                    </p>
+
+                                </div>                                
+                            }
+                            else
+                            {
+                                <div id="divBasic" style="display: none;">
+                                    <p>$&nbsp;@Html.TextBoxFor(m => m.BasicRate)
+                                        <br />
+                                    @Html.ValidationMessageFor(m=>m.BasicRate)
+                                        </p>
+                                </div>
+                                <div id="divDiscount">
+                                    <p>
+                                        @Html.TextBoxFor(m => m.DiscountDays)&nbsp;Days
+                                        <br />
+                                        @Html.ValidationMessageFor(m=>m.DiscountDays)
+                                    </p>
+                                    <p>
+                                        @Html.TextBoxFor(m => m.DiscountRate)&nbsp;%
+                                        <br />
+                                        @Html.ValidationMessageFor(m=>m.DiscountRate)
+                                    </p>
+                                </div>                                   
+                            }
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Is Delete:
+                        </th>
+                        <td>
+                            @Html.CheckBoxFor(m => m.IsDelete)</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align: center">
+                            <br />
+                            <br />
+                            <br />
+                            <input type="submit" value="Save" id="btnSave" />
+
+                            <button type="button" onclick="window.location.href='@Url.Action("RoomRateList")'" id="btnReturn" >Return</button>
+                        </td>
+                    </tr>
+                </table>
+                
+            }
+
+        </div>
+    </div>
+</div>

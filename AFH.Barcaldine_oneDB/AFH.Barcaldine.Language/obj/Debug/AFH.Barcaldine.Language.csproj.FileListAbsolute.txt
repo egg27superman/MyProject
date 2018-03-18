@@ -1,0 +1,26 @@
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.en-AU.resources
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh-CN.resources
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh_HK.resources
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.csproj.GenerateResource.Cache
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.csprojResolveAssemblyReference.cache
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.csprojResolveAssemblyReference.cache
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.en-AU.resources
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh-CN.resources
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh_HK.resources
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.csproj.GenerateResource.Cache
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\bin\Debug\AFH.Barcaldine.Language.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.en-AU.resources
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh-CN.resources
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.Resources.zh_HK.resources
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.csproj.GenerateResource.Cache
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Language\obj\Debug\AFH.Barcaldine.Language.pdb

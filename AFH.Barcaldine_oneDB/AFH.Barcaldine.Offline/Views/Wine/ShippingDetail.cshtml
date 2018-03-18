@@ -1,0 +1,77 @@
+﻿@model AFH.Barcaldine.Models.ShippingDetailModel
+@{
+    ViewBag.Title = "ShippingDetail";
+}
+
+<script>
+    $(function () {
+        $("#spinner").spinner({
+            min: 1
+        });
+        $("#btnSave").button();
+        $("#btnReturn").button();
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+
+           @using (Html.BeginForm("ShippingDetail", "Wine", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.ShippingID);   
+                @Html.HiddenFor(m => m.OpertationStatus);
+                
+                 @*@Html.HiddenFor(m => m.State);*@
+                
+                <table>
+                    <tr>
+                        <td>
+                            <p>State：</p>
+                        </td>
+                        <td>
+                            @if (Model.OpertationStatus == AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add)
+                            {
+                                @Html.DropDownListFor(m => m.State, Model.GetStateList(), null, new { @style = "width:200px" })
+                                                
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.State, Model.GetStateList(), null, new { @style = "width:200px", @disabled = "true" })
+                            }
+
+                        </td>
+                        <td>
+                            <p>Shipping Rate:</p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.ShippingRate, null, new { @id = "spinner" })
+                                                                    <br />
+                                        @Html.ValidationMessageFor(m => m.ShippingRate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Is Delete：</p>
+                        </td>
+                        <td>
+                            @Html.CheckBoxFor(m => m.IsDelete)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>                
+                
+                <div style="text-align: center">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Save" id="btnSave" />
+                    <button type="button" onclick="window.location.href='@Url.Action("ShippingList")'" id="btnReturn" >Return</button>
+                </div>              
+            }
+        </div>
+    </div>
+</div>

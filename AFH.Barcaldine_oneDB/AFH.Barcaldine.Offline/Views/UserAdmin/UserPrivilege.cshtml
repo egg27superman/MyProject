@@ -1,0 +1,97 @@
+﻿@model AFH.Barcaldine.Models.UserUpdateModule
+@{
+    ViewBag.Title = "UserPrivilege";
+    
+}
+
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("UserPrivilege", "UserAdmin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(m => m.UserID)
+                @Html.HiddenFor(m => m.Password)
+                @Html.HiddenFor(m => m.OpertationStatus)  
+
+                <table>
+                      
+                       
+                        @if (Model.OpertationStatus == AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add)
+                        {
+                          <tr>
+                            <th>
+                            @Html.LabelFor(m => m.UserName)
+                            </th>
+                            <td>
+                                @Html.DropDownListFor(m=>m.UserNameSearch.UserID, Model.UserNameSearch.GetUserNameList)
+                                <br />
+                           
+                            </td>
+                          </tr>
+                            
+                             for(int i=0;i< Model.UserPrivilegeList.Count;i++)
+                     
+                             {
+                      
+                                   @Html.HiddenFor(m => m.UserPrivilegeList[i].UserID)
+                                   @Html.HiddenFor(m => m.UserPrivilegeList[i].MenuID)
+                              <tr>
+                        
+                                    <td>@Model.UserPrivilegeList[i].menuname</td>
+                                    <td>@Html.CheckBoxFor(m=>m.UserPrivilegeList[i].IsSelected)</td>
+                       
+                               </tr>
+                            
+                              }
+                        }
+                        else
+                        {
+                          <tr>
+                           <th>
+                            @Html.LabelFor(m => m.UserName)
+                           </th>
+                            <td>
+                                @Html.TextBoxFor(m => m.UserName, new { @readonly = true })
+                            </td>    
+                          </tr>  
+                            
+                            for(int i=0;i< Model.UserPrivilegeList.Count;i++)
+                     
+                             {
+                      
+                                   @Html.HiddenFor(m => m.UserPrivilegeList[i].UserID)
+                                   @Html.HiddenFor(m => m.UserPrivilegeList[i].MenuID)
+                              <tr>
+                        
+                                    <td>@Model.UserPrivilegeList[i].menuname</td>
+                                    <td>@Html.CheckBoxFor(m=>m.UserPrivilegeList[i].IsSelected)</td>
+                       
+                               </tr>
+                             }
+                                                  
+                        }
+
+                 
+                </table>     
+                <br />                                               
+                @Html.ValidationSummary(true);
+                <br />
+                <div class="SucessMessage">@ViewBag.SucessMessage</div>
+                <br />
+                <input type="submit" value="Save">
+                if (Model.OpertationStatus == AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update)
+                {
+                                              <button type="button" onclick="window.location.href='../../UserAdmin/UserList'">Return</button> 
+                }
+                else if (Model.OpertationStatus == AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add)
+                {
+                    <button type="button" onclick="window.location.href='../UserAdmin/UserList'">Return</button> 
+                }
+            }
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

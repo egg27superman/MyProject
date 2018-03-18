@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AFH.Common.Serializer</name>
+    </assembly>
+    <members>
+        <member name="M:AFH.Common.Serializer.JsonSerializer.Serialize``1(``0)">
+            <summary>
+            将指定对象序列化成XML格式的字符串
+            </summary>
+            <param name="ob">需要序列化的对象</param>
+            <returns>返回XML格式的字符串</returns>
+        </member>
+        <member name="M:AFH.Common.Serializer.JsonSerializer.Deserialize``1(System.String)">
+            <summary> 
+            反序列化 
+            </summary> 
+            <param name="type"></param> 
+            <param name="xml"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:AFH.Common.Serializer.JsonSerializer.ConvertDateStringToJsonDate(System.Text.RegularExpressions.Match)">
+            <summary>
+            将时间字符串转为Json时间
+            </summary>
+        </member>
+        <member name="M:AFH.Common.Serializer.XMLSerializer.Serialize``1(``0)">
+            <summary>
+            将指定对象序列化成XML格式的字符串
+            </summary>
+            <param name="ob">需要序列化的对象</param>
+            <returns>返回XML格式的字符串</returns>
+        </member>
+        <member name="M:AFH.Common.Serializer.XMLSerializer.Deserialize``1(System.String)">
+            <summary> 
+            反序列化 
+            </summary> 
+            <param name="type"></param> 
+            <param name="xml"></param> 
+            <returns></returns> 
+        </member>
+    </members>
+</doc>

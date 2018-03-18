@@ -1,0 +1,99 @@
+﻿@model AFH.Barcaldine.Models.FaultOrderListModel
+
+@{
+    ViewBag.Title = "FaultOrderList";
+}
+
+
+<script>
+    $(function () {
+        $("#btnSearch").button();
+
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("FaultOrderList", "Order", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+
+                <table>
+                    <tr>
+                        <td><p>Order No: </p></td>
+                        <td>@Html.TextBoxFor(m => m.FaultOrderListSearch.OrderNo, null, new { maxlength = "10" })</td>
+                        <td><p>Order Type:</p></td>
+                        <td>@Html.DropDownListFor(m => m.FaultOrderListSearch.OrderType, Model.FaultOrderListSearch.GetOrderTypeList())</td>
+                    </tr>
+                    <tr>
+                        <td><p>ProcessType: </p></td>
+                        <td>@Html.DropDownListFor(m => m.FaultOrderListSearch.ProcessType, Model.FaultOrderListSearch.GetProcessTypeList())</td>
+                        <td><p>Order Status:</p></td>
+                        <td>@Html.DropDownListFor(m => m.FaultOrderListSearch.OrderStatus, Model.FaultOrderListSearch.GetOrderStatusList())</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Order Date: </p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.FaultOrderListSearch.OrderDateStart, null, new { @class = "datepicker", @Value = Convert.ToDateTime(Model.FaultOrderListSearch.OrderDateStart).ToString("dd/MM/yyyy") }) 
+                            ~ @Html.TextBoxFor(m => m.FaultOrderListSearch.OrderDateEnd, null, new { @class = "datepicker", @Value = Convert.ToDateTime(Model.FaultOrderListSearch.OrderDateEnd).ToString("dd/MM/yyyy") })
+                        </td>
+                        <td><p>Is Delete</p></td>
+                        <td>@Html.DropDownListFor(m => m.FaultOrderListSearch.IsDelete, Model.FaultOrderListSearch.GetIsDeleteSelectList())</td>
+
+                    </tr>
+                    
+
+                    <tr>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                                
+            }
+            <br />
+
+            <table class="tableClass">
+                <tr>
+                    <th>Order No</th>
+                    <th>Order Type</th>
+                    <th>Process Type</th>
+                    <th>Order Date</th>
+                    <th>TotalPrice</th>
+                    @*<th>OrderStatus</th>*@
+                    <th>FaultMessage</th>
+                    <th>Is Delete</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.FaultOrderListResultModel resultModel in Model.FaultOrderListResult)
+                {
+                    <tr>
+                        <td>@resultModel.OrderNo</td>
+                        <td>@resultModel.OrderTypeName</td>
+                        <td>@resultModel.ProcessTypeName</td>
+                        <td>@resultModel.OrderDate.ToString("dd/MM/yyyy")</td>
+                        <td>$@resultModel.TotalPrice.ToString("#,###,##0.00")</td>
+                        @*<td>@resultModel.OrderStatusName</td>*@
+                        <td>@resultModel.FaultMessage</td>
+                        <td>@resultModel.IsDelete</td>
+                        <td>@Html.ActionLink("Detail", "OrderDetail", "Order", new {  orderID = resultModel.OrderID, sourcefrom = "FaultOrderList" }, null)</td>
+                    </tr>
+                }
+
+        </table>
+
+
+
+
+
+        </div>
+    </div>
+</div>

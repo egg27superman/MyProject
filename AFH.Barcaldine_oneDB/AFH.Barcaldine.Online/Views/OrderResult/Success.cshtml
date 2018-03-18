@@ -1,0 +1,57 @@
+﻿@model AFH.Barcaldine.Models.OrderSuccessModel
+@{
+    ViewBag.Title = "Success";
+}
+@*<script type="text/javascript">
+    //window.history.forward(1);
+
+    //window.history.forward(1);
+    //function document.onkeydown() 
+    //{ 
+    //    if ((event.keyCode==8)   ||                  //屏蔽退格删除键 
+    //        (event.keyCode==116)||                  //屏蔽 F5 刷新键 
+    //        (event.ctrlKey && event.keyCode==82)){ //Ctrl + R 
+    //        event.keyCode=0; 
+    //        event.returnValue=false; 
+    //    } 
+    //} 
+
+</script>*@
+
+
+<script type="text/javascript">
+
+    document.onkeypress = banBackSpace;
+    document.onkeydown = banBackSpace;
+
+    window.history.forward(-1);
+
+    //window.close(true);
+
+    //var isForward = (location.search.indexOf('forward=1') == -1);
+    ////alert(location.search.indexOf('forward=1'));
+    //if (isForward) {
+    //    location = (location.href + (location.search.indexOf('?') == -1 ? '?' : '&') + 'forward=1');
+    //}
+
+</script>
+
+<div style="height: 640px;margin:10% 15%">
+    <div style="float:left; width:100px;">
+        <img src="..\Images\good-or-tick.png" style="width:100px;" />
+    </div>
+    <div style="font-size:18px;float:left; width:500px; padding-left: 20px; padding-top: 20px">
+        @if(Model.ProcessType == (int)AFH.Barcaldine.Common.GlobalVariable.ProcessType.Online)
+        {
+            <h1 style="color:green">Thank you for your ordering.</h1>
+        }
+        else
+        {
+            <h1 style="color:green">Thank you for your pre-order. Our staff will contact you soon. </h1>
+        }
+
+        <h1>&nbsp;</h1>
+        <h1>Your order No is @Model.OrderNo </h1>
+    </div>
+
+</div>

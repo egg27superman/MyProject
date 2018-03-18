@@ -1,0 +1,64 @@
+﻿@model List<AFH.Barcaldine.Models.ProductView>
+@{
+    ViewBag.Title = "WineList";
+    
+}
+
+@*<h2>WineList</h2>*@
+<div class="content content-type-page" id="cid-3">
+    <div class="wines-tpl">
+        <div id="wines-list">
+            <ul>
+                @foreach (AFH.Barcaldine.Models.ProductView product in Model)
+                {
+                    foreach (AFH.Barcaldine.Models.ProductDescribleModel desc in product.ProductDescrible)
+                    {
+                        if (@desc.Language == AFH.Barcaldine.Common.GlobalVariable.LanguageName.English)
+                        {
+                            <li id="@product.WineID">
+
+                                <h2>@desc.DescribleDetail.Name</h2>
+                                <div class="lbl">
+                                    <label>Type:</label><span>@product.WineCategoryName.English</span></div>
+                                <div class="lbl">
+                                    <label>Measure:</label><span>0.75</span></div>
+                                <div class="lbl">
+                                    <label>Region:</label><span>@product.Region</span></div>
+                                @if(!string.IsNullOrEmpty(product.ListPicture))
+                                {
+                                <div class="wineImage" style="background-image: url('@Url.Content(product.ListPicture)')"></div>
+                                }
+                                else
+                                {
+                                    <div class="wineImage"></div>
+
+                                }
+                    
+                                <div class="line"></div>
+                                @if(@desc.DescribleDetail.ShortIntro !=null)
+                                {
+                                    <div class="short-desc"><span style="font-weight: bold;">@desc.DescribleDetail.ShortIntro.ToString()</span></div>
+                                }
+                                else
+                                {
+                                    <div class="short-desc"></div>
+                                }
+                                <a href="@Url.Action("WineDetail", new { id=@product.WineID})"><div class="price">$@product.Price.ToString("#,###,###.00")</div></a>
+                                <div class="footer"><a href="@Url.Action("WineDetail", new { id=@product.WineID})">View Detail</a></div>
+                            </li>                                
+                        }
+                    }
+                    
+                
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="clear"></div>
+<br />
+<br />
+<br />
+<br />
+<br />

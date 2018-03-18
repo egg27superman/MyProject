@@ -1,0 +1,62 @@
+﻿@model AFH.Barcaldine.Models.WineCategoryListModel
+
+@{
+    ViewBag.Title = "ProductCategoryList";
+}
+
+<script>
+    $(function () {
+        $("#btnSearch").button();
+    });
+</script>
+
+@*<h2>ProductCategoryList</h2>*@
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("WineCategoryList", "Wine", FormMethod.Post))
+            {
+                <p>Is Delete: @Html.DropDownListFor(m => m.WineCategorySearch.IsDelete, Model.WineCategorySearch.GetSelectList())
+                    <input type="submit" value="Search" id="btnSearch" /></p>
+            }
+
+            <br />
+            @Html.ActionLink("ADD Wine Category", "WineCategoryDetail", "Wine", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add, id = string.Empty }, null)
+            <table class="tableClass">
+                <tr>
+                    <th>Wine Category ID</th>
+                    <th>English Name</th>
+                    <th>中文简体</th>
+                    <th>中文繁体</th>
+                    <th>Is Delete</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.WineCategoryResultModel myModel in Model.WineCategoryResult)
+                {
+                    <tr>
+                        <td>@myModel.WineCategoryID</td>
+
+                        @{ 
+                            AFH.Common.Serializer.JsonSerializer json = new AFH.Common.Serializer.JsonSerializer();
+                            AFH.Barcaldine.Models.WineCategoryNameModel name = json.Deserialize<AFH.Barcaldine.Models.WineCategoryNameModel>(myModel.WineCategoryName);
+                            if (name != null)
+                            {
+                                    <td>@name.English</td>
+                                    <td>@name.SimplifiedChinse</td>
+                                    <td>@name.TraditionalChinse</td>
+                            }
+                            else
+                            {
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>                                
+                            }
+                        }
+                        <td>@myModel.IsDelete</td>
+                        <td>@Html.ActionLink("Update", "WineCategoryDetail", "Wine", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update, id = myModel.WineCategoryID }, null)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

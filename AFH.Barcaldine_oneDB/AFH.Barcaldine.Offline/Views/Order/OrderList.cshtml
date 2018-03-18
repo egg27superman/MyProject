@@ -1,0 +1,99 @@
+﻿@model AFH.Barcaldine.Models.OrderListModel
+@{
+    ViewBag.Title = "OrderList";
+}
+
+
+
+<script>
+    $(function () {
+        $("#btnSearch").button();
+
+    });
+</script>
+
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("OrderList", "Order", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <table>
+                    <tr>
+                        <td><p>Order No: </p></td>
+                        <td>@Html.TextBoxFor(m => m.OrderListSearch.OrderNo, null, new { maxlength="10"})</td>
+                        <td><p>Order Type:</p></td>
+                        <td>@Html.DropDownListFor(m => m.OrderListSearch.OrderType, Model.OrderListSearch.GetOrderTypeList())</td>
+                    </tr>
+                    <tr>
+                        <td><p>ProcessType: </p></td>
+                        <td>@Html.DropDownListFor(m => m.OrderListSearch.ProcessType, Model.OrderListSearch.GetProcessTypeList())</td>
+                        <td><p>Order Status:</p></td>
+                        <td>@Html.DropDownListFor(m => m.OrderListSearch.OrderStatus, Model.OrderListSearch.GetOrderStatusList())</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Order Date: </p>
+                        </td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.OrderListSearch.OrderDateStart, null, new { @class = "datepicker", @Value = Convert.ToDateTime(Model.OrderListSearch.OrderDateStart).ToString("dd/MM/yyyy") }) 
+                            ~ @Html.TextBoxFor(m => m.OrderListSearch.OrderDateEnd, null, new { @class = "datepicker",  @Value = Convert.ToDateTime(Model.OrderListSearch.OrderDateEnd).ToString("dd/MM/yyyy") })
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+            <br />
+
+            <table class="tableClass">
+                <tr>
+                    <th>Order No</th>
+                    <th>Order Type</th>
+                    <th>Process Type</th>
+                    <th>Order Date</th>
+@*                    <th>Original Price</th>
+                    <th>Discount</th>
+                    <th>Shipping</th>*@
+                    <th>TotalPrice</th>
+                    @*<th>Tax</th>*@
+                    <th>OrderStatus</th>
+                    <th>OrderDesc</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.OrderListResultModel resultModel in Model.OrderListResult)
+                {
+                    <tr>
+                        <td>@resultModel.OrderNo</td>
+                        <td>@resultModel.OrderTypeName</td>
+                        <td>@resultModel.ProcessTypeName</td>
+                        <td>@resultModel.OrderDate.ToString("dd/MM/yyyy")</td>
+@*                        <td>$@resultModel.OriginalPrice.ToString("#,###,##0.00")</td>
+                        <td>$@resultModel.Discount.ToString("#,###,##0.00")</td>
+                        <td>$@resultModel.Shipping.ToString("#,###,##0.00")</td>*@
+                        <td>$@resultModel.TotalPrice.ToString("#,###,##0.00")</td>
+                        @*<td>$@resultModel.Tax.ToString("#,###,##0.00")</td>*@
+                        <td>@resultModel.OrderStatusName</td>
+                        <td>@resultModel.OrderDesc</td>
+                        <td>@Html.ActionLink("Detail", "OrderDetail", "Order", new {  orderID = resultModel.OrderID, sourcefrom = "OrderList"  }, null)</td>
+                    </tr>
+                }
+
+        </table>
+            <br />
+
+        </div>
+    </div>
+</div>
+

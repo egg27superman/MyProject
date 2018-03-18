@@ -1,0 +1,14 @@
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.csprojResolveAssemblyReference.cache
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.dll
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.pdb
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.csprojResolveAssemblyReference.cache
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.dll
+D:\.NET MVC Project\Barcaldine_modify_byNi\AFH.Barcaldine_Ni\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Common\bin\Debug\AFH.Barcaldine.Common.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.dll
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.Common\obj\Debug\AFH.Barcaldine.Common.pdb

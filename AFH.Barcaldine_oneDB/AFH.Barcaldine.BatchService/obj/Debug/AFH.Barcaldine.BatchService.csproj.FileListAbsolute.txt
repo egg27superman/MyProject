@@ -1,0 +1,12 @@
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.exe.config
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.exe
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.exe
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.pdb
+E:\Website\05 Src\AFH.Barcaldine\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.csprojResolveAssemblyReference.cache
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.exe.config
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.exe
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\bin\Debug\AFH.Barcaldine.BatchService.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.exe
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.pdb
+C:\Users\NI\Documents\Visual Studio 2012\Projects\AFH.Barcaldine_oneDB\AFH.Barcaldine.BatchService\obj\Debug\AFH.Barcaldine.BatchService.csprojResolveAssemblyReference.cache

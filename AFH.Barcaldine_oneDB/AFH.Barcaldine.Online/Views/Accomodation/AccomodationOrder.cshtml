@@ -1,0 +1,420 @@
+﻿@model AFH.Barcaldine.Models.AccomodationOrderModel
+
+@{
+    ViewBag.Title = "AccomodationOrder";
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").button();
+        $("#btnCheck").button();
+        $("#overlay").hide();
+
+        var date = new Date($.ajax({ async: false }).getResponseHeader("Date"));   //false指有返回值后才执行后面的代码（同步线程）
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: date
+        }).val();
+
+        CalcTotprice();
+
+        $("input[name=ProcessType]:radio").change(function () {
+            if ($(this).val() == "0") {
+                $("#tblPayment").show();
+            }
+            else {
+                $("#tblPayment").hide();
+            }
+        })
+
+        if ($("#rdoOnline").attr("checked") == 'checked') {
+            $("#tblPayment").show();
+        }
+        else {
+            $("#tblPayment").hide();
+        }
+
+        $("#creditcard1").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard2").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard3").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#creditcard4").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+        $("#cvvno").keyup(function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).bind("paste", function () {
+            $(this).val($(this).val().replace(/\D|^/g, ''));
+        }).css("ime-mode", "disabled");
+
+    })
+
+
+
+    function ShowOverlay() {
+
+        var overlay = $('<div id="overlay"></div>');
+        overlay.appendTo(document.body)
+    }
+
+    function CalcTotprice() {
+        var totalroom = 0;
+        var totalprice = 0;
+        for (var i = 0; i <= 1; i++) {
+            
+            var price = $("#price" + i).val();
+            var roomcount = $("#OrderRoomNumber" + i).val();
+            if (price != undefined && roomcount != undefined) {
+                totalroom = totalroom + parseFloat(roomcount);
+                totalprice = totalprice + price * roomcount;
+            }
+        }
+
+
+        var totalpricespan = $("#totalprice");
+        if (totalroom != 0 && totalprice != 0) {
+            var html = totalroom + " room for<br/>";
+            html += "<span style='color:Red; font-size:18px;'>AUD " + totalprice + "</span><br/>";
+            totalpricespan.html(html);
+        }
+        else {
+            totalpricespan.html('');
+        }
+    }
+
+</script>
+
+<div class="content content-type-page" id="cid-4">
+    <div class="production-tpl">
+
+        <br />
+
+        @if (Model != null)
+        {
+            if (Model.ResultStatus == 2 || Model.ResultStatus == 3)
+            {
+            <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                <p>
+                    <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                    <strong>Error:</strong> @Model.ResultMsg
+                </p>
+            </div>                
+            }
+        }
+
+
+        @using (Html.BeginForm("GetAvailableRoom", "Accomodation", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="production-bg">
+                <div class="span2_of_1">
+                    <h4>check-in:</h4>
+
+                    <div class="book_date btm">
+
+                        @Html.TextBoxFor(m => m.CheckInDate, null, new { @class = "datepicker",  @maxlength="10" })
+                        <br />
+                        @Html.ValidationMessageFor(m => m.CheckInDate)
+                    </div>
+
+                </div>
+
+                <div class="span2_of_2">
+                    <h4>check-out:</h4>
+
+                    <div class="book_date btm">
+                        @Html.TextBoxFor(m => m.CheckOutDate, null, new { @class = "datepicker",  @maxlength="10" })
+                        <br />
+                        @Html.ValidationMessageFor(m => m.CheckOutDate)
+                    </div>
+                </div>
+
+                <div class="span2_of_3">
+                    <div class="book_date btm">
+                        <input type="submit" id="btnCheck" value="Check" onclick="ShowOverlay()">
+                    </div>
+                </div>
+
+
+            </div>
+
+        }
+
+
+
+
+        @using (Html.BeginForm("AccomodationOrder", "Accomodation", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="book_table">
+                <table class="short-table grey" style="width: 80%">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">Room Type</th>
+                            <th style="text-align: center">Max<br />
+                            </th>
+
+                            <th style="text-align: center">Conditions</th>
+                            <th style="text-align: center">Price</th>
+                            <th style="text-align: center">Nr. rooms</th>
+                            <th style="text-align: center">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (Model != null && Model.AccomodationOrderList != null)
+                        {
+
+                            @Html.HiddenFor(m => m.CheckInDate, new { @id = "orderCheckin" })
+                            @Html.HiddenFor(m => m.CheckOutDate, new { @id = "orderCheckout" })
+
+                            for (int i = 0; i < Model.AccomodationOrderList.Count; i++)
+                            {
+                                AFH.Barcaldine.Models.AccomodationOrderListModel order = Model.AccomodationOrderList[i];
+                            @Html.HiddenFor(m => m.AccomodationOrderList[i].RoomType)
+                            @Html.HiddenFor(m => m.AccomodationOrderList[i].Price)
+                            @Html.HiddenFor(m => m.AccomodationOrderList[i].DiscountPrice)
+                            @Html.HiddenFor(m => m.AccomodationOrderList[i].AvailableRoomNumber)
+
+                            
+                            <tr>
+                                @if (@order.RoomType == 0)
+                                {
+                                    <th class="features">King Room</th>
+                                    <td>4 People</td>
+                                    <td>
+                                        <div style="text-align: left">
+                                            *Special conditions, pay when you stay<br />
+                                            *Breakfast included
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <th class="features">Queen Room</th>
+                                    <td>2 People</td>
+                                    <td>
+                                        <div style="text-align: left">
+                                            *Special conditions, pay when you stay<br />
+                                            *Breakfast included
+                                        </div>
+                                    </td>
+                                }
+
+                                <td><span style="text-decoration: line-through">AUD @order.Price</span>
+                                    <br />
+                                    <span style="color: red; font-size: 18px">AUD @order.SubTotalPrice</span>
+                                    @Html.HiddenFor(m => m.AccomodationOrderList[i].SubTotalPrice, new { @id = "price" + order.RoomType.ToString() })
+                                </td>
+                                <td>
+
+                                    @Html.DropDownListFor(m => m.AccomodationOrderList[i].OrderRoomNumber, order.GetAvailableRoomList(), null, new { @id = "OrderRoomNumber" + order.RoomType.ToString(), @onchange = "CalcTotprice()", @class = "frm-field required" })
+
+                                </td>
+                                @if (i == 0)
+                                {
+                                    <td rowspan="2">
+                                        <span id="totalprice"></span>
+                                    </td>
+                                }
+                            </tr>                        
+                            }
+                            <tr></tr>
+                
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>          
+            <br />
+            <div class="delivery_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="height: 20px; padding-top: 10px; vertical-align: top;" colspan="4"><span
+                                style="font-weight: bold">Order Details</span></td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Adults Count:</td>
+                        <td>@Html.TextBoxFor(m => m.AccomodationOrderDetail.AdultCount, null, new { @maxlength = "1" })
+                            <br />
+                            @Html.ValidationMessageFor(m=>m.AccomodationOrderDetail.AdultCount)
+                        </td>
+                        <td>Kids Count:</td>
+                        <td>@Html.TextBoxFor(m=>m.AccomodationOrderDetail.KidsCount, null, new { @maxlength = "1" })
+                            <br />
+                            @Html.ValidationMessageFor(m=>m.AccomodationOrderDetail.KidsCount)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top">Special Request:</td>
+                        <td colspan="3">@Html.TextAreaFor(m => m.AccomodationOrderDetail.AdditionalDetail, new { @style="width:430px; height:110px",  @maxlength = "300"})</td>
+                    </tr>
+                </table>
+            </div>            
+            
+            
+            <div class="delivery_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="height: 20px; padding-top: 10px; vertical-align: top;" colspan="4"><span
+                                style="font-weight: bold">Contact Details</span></td>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td class="">Name</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Contact.Name, null, new { @style = "width:500px", @maxlength="250" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.Name)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Address</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Contact.Address, null, new { @style = "width:500px", @maxlength="250" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.Address)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td>
+                            @Html.DropDownListFor(m => m.Contact.State, Model.Contact.GetStateList(), null, new { @style = "width:100px", @id="state"})
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.State)
+                        </td>
+
+                        <td>Post Code</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Contact.PostCode, null, new { @maxlength="10"})
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.PostCode)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="">Phone</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Contact.Phone, null, new { @maxlength="50"})
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.Phone)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Email</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.Contact.Email, null, new { @maxlength="200"})
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Contact.Email)
+                        </td>
+                    </tr>
+
+                </table>
+                <br />
+                <br />
+            </div>
+
+            <div class="delivery_table">
+                <p style="font-size:16px">@Html.RadioButtonFor(m => m.ProcessType, 0, new { @name = "rdoOnline", @id="rdoOnline" }) Pay the order directly</p>
+                <br />
+                <p style="font-size:16px">@Html.RadioButtonFor(m => m.ProcessType, 1, new { @name = "rdoOffline", @id="rdoOffline" }) Pay the order with our staff assistant</p>
+                <br />
+                <table id="tblPayment">
+                    <thead>
+                        <tr>
+                            <td style="height: 20px; padding-top: 10px; vertical-align: top;" colspan="2"><span
+                                style="font-weight: bold">Payment Details</span></td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="2">
+                            <img src="~/Images/iconCreditcards.gif" /></td>
+                    </tr>
+                    <tr>
+                        <td width="25%">Credit Card Number
+                        </td>
+                        <td>
+                                @Html.TextBoxFor(m => m.Payment.creditCard1, null, new { @size = "4", @maxLength = "4", @id="creditcard1" })
+                                @Html.TextBoxFor(m => m.Payment.creditCard2, null, new { @size = "4", @maxLength = "4", @id="creditcard2" })
+                                @Html.TextBoxFor(m => m.Payment.creditCard3, null, new { @size = "4", @maxLength = "4", @id="creditcard3" })
+                                @Html.TextBoxFor(m => m.Payment.creditCard4, null, new { @size = "4", @maxLength = "4", @id="creditcard4" })
+                            
+                            <br />
+                                @Html.ValidationMessageFor(m => m.Payment.creditCard1)
+                                @Html.ValidationMessageFor(m => m.Payment.creditCard2)
+                                @Html.ValidationMessageFor(m => m.Payment.creditCard3)
+                                @Html.ValidationMessageFor(m => m.Payment.creditCard4)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Expiry Date
+                        </td>
+                        <td>
+                            
+                                @Html.DropDownListFor(m => m.Payment.ExpiryMonth, Model.Payment.GetMonth())
+                                @Html.DropDownListFor(m => m.Payment.ExpiryYear, Model.Payment.GetYear())
+                            <br />
+                                @Html.ValidationMessageFor(m => m.Payment.ExpiryMonth)
+                                @Html.ValidationMessageFor(m => m.Payment.ExpiryYear)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Card security code</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Payment.CVV, null, new { @size = "3", @maxLength = "3", @id="cvvno" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Payment.CVV)
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+
+            <input name="Submit" id="btnSubmit" value="Book Now" type="submit" onclick="ShowOverlay()">
+            <br />
+            <br />
+        }
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<script type="text/javascript">
+    if ($("#orderCheckin").val() == undefined) {
+        $("#btnSubmit").hide();
+    }
+    else {
+        $("#btnSubmit").show();
+    }
+</script>
+
+

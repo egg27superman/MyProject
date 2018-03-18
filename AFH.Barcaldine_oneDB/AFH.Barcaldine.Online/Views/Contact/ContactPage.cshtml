@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "ContactPage";
+}
+
+ <div class="wrap" id="content">
+        <div class="content content-type-page" id="cid-5">
+                      <div class="contact-tpl">
+  <article class="contact-bg">
+    <div class="left"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3171.1270309232564!2d144.202474!3d-37.363171!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad6d13d733d4b3b%3A0xd41af1d1cf337a61!2s238+Dairy+Flat+Rd%2C+Musk+VIC+3461!5e0!3m2!1sen!2sau!4v1414906001285" width="717" height="392" frameborder="0" style="border:0"></iframe></div>
+
+    <div class="right">
+      <div class="triangle"></div>
+      <h1>Barcaldine House</h1>
+      238 Dairy Flat Rd<br>Musk, Victoria<br>Australia, 3461<br><br>For all enquiries please contact Miss Lingbo on:<br>tel. (03)5348 2741<br>Mobile:0422954667<br>manager@barcaldinehouse.com.au<br>
+      <div class="bottle"></div>
+
+    </div>
+  </article>
+  <section class="block iota-block">
+    
+<article class="transition-05">
+ 
+</article>
+<article class="transition-05">
+  
+  
+</article>
+<article class="transition-05">
+  <h2>Distributors in Washington D.C.</h2>
+  <table><tbody><tr><td>
+Rijeka, Kruzna 8, Croatia
+<br>mail. support@prospekt-solutions.com<br>
+tel. +987 654 321,<br> 
+Fax. +987 654 321
+<br><a href="http://www.prospekt-solutions.com" target="_blank">www.prospekt-solutions.com</a>
+
+</td>
+<td>
+Rijeka, Kruzna 8, Croatia
+<br>mail. support@prospekt-solutions.com<br>
+tel. +987 654 321,<br> 
+Fax. +987 654 321
+<br><a href="http://www.prospekt-solutions.com" target="_blank">www.prospekt-solutions.com</a>
+</td>
+<td>
+Rijeka, Kruzna 8, Croatia
+<br>mail. support@prospekt-solutions.com<br>
+tel. +987 654 321,<br> 
+
+Fax. +987 654 321
+<br><a href="http://www.prospekt-solutions.com" target="_blank">www.prospekt-solutions.com</a>
+</td>
+<td>
+Rijeka, Kruzna 8, Croatia
+<br>mail. support@prospekt-solutions.com<br>
+tel. +987 654 321,<br> 
+Fax. +987 654 321
+<br><a href="http://www.prospekt-solutions.com" target="_blank">www.prospekt-solutions.com</a>
+</td>
+</tr></tbody></table>
+  <label>Washington D.C.</label>
+
+</article>
+<script>
+(function($) {
+  var interval, timeout;
+  $(document).ready(function() {
+    $('#iota-labels').html('<h3 class="select-title"></h3><ul class="select-options"></ul>');
+    $('section.iota-block article').each(function() {
+      var _ = $('<li>'+$(this).find('label').html()+'</li>').click(function() {
+        show($(this));
+      });
+      $('#iota-labels .select-options').append(_);
+    });
+    $('#iota-labels .select-title, #iota-labels .select-options').click(function() {
+      $('#iota-labels .select-options').toggle(); 
+    });
+    show($('#iota-labels .select-options li:first'));
+  });
+  
+  function show(el) {
+    var i = $('#iota-labels .select-options li').index(el);
+    $('#iota-labels .select-title').html(el.html());
+    $('section.iota-block article.active').removeClass('active');
+    $('section.iota-block article:eq('+i+')').addClass('active');
+    $('#iota-labels label.active').removeClass('active');
+    el.addClass('active');
+  }
+  
+ 
+})(jQuery);
+</script>
+
+  </section>
+  
+</div>
+         </div>
+    </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

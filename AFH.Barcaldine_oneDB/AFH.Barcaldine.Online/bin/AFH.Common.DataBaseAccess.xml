@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AFH.Common.DataBaseAccess</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:AFH.Common.DataBaseAccess.DataMappingHelper`1.DataRowToEntity(System.Data.DataRow)" -->
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.DataTableToEntity(System.Data.DataTable)">
+            <summary>
+            get object entity from data table depend on the object entity
+            </summary>
+            <param name="dt">datatable</param>
+            <returns></returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.DataTableToList(System.Data.DataTable)">
+            <summary>
+            get object entity list from data table depend on the object entity model
+            </summary>
+            <param name="dt">source data table</param>
+            <returns></returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.getDefaultValue(System.Object,System.Type)">
+            <summary>
+            获取数据的默认值
+            </summary>
+            <param name="obj"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.getPropertyType(System.Type)">
+            <summary>
+            获取数据的类型
+            </summary>
+            <param name="obj"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.EntityToEntity(`0,`0)">
+            <summary>
+            将源数据实体类赋值到目标数据实体类，返回目标实体类
+            </summary>
+            <param name="tSource">源实体类</param>
+            <param name="tDestination">目标实体类</param>
+            <returns>目标实体类</returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.DataMappingHelper`1.CorrectEntityParameter(`0)">
+            <summary>
+            纠正搜索实体中字段字符串为空或者首尾包含空格方法
+            </summary>
+            <param name="t">实体类</param>
+            <returns>实体类</returns>
+        </member>
+        <member name="M:AFH.Common.DataBaseAccess.SqlAccess.ExecuteScalar(System.String)">
+            <summary>
+            执行单条SQL，返回值
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

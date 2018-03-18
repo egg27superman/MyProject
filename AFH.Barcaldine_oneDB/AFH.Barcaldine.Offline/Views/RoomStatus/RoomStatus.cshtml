@@ -1,0 +1,216 @@
+﻿@model AFH.Barcaldine.Models.RoomStatusModel
+@{
+    ViewBag.Title = "RoomStatus";
+}
+
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
+
+    #selectable .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectable .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 850px;
+    }
+
+        #selectable li {
+            margin: 3px;
+            padding: 1px;
+            float: left;
+            width: 100px;
+            height: 80px;
+            font-size: 4em;
+            text-align: center;
+        }
+
+    #selectable1 li {
+        margin: 3px;
+        padding: 1px;
+        float: left;
+        width: 100px;
+        height: 20px;
+        font-size: 1em;
+        text-align: center;
+    }
+</style>
+<script>
+    $(function () {
+        $("#selectable").bind("mousedown", function (e) {
+            e.metaKey = true;
+        }).selectable();
+        $("#rdoRoom").buttonset();
+        $("#btnSearch").button();
+        $("#btnSave").button();
+        $("#btnReturn").button();
+    });
+
+
+    function GetSelectedData() {
+
+        ClearMessage();
+
+        $("#hiddenChooseDate").val("");
+        var a = $(".ui-selected");
+        for (var i = 0; i < a.length; i++) {
+            var choose = $("#hiddenChooseDate").val();
+            choose = choose + a[i].id + ",";
+            $("#hiddenChooseDate").val(choose);
+
+        }
+    }
+
+    function ClearMessage() {
+        var totalpricespan = $("#spanmessage");
+        totalpricespan.html('');
+    }
+
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+
+
+            @using (Html.BeginForm("RoomStatus", "RoomStatus", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            <p>Month:</p>
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(m => m.Year, Model.GetYearList())
+                            @Html.DropDownListFor(m => m.Month, Model.GetMonthList())
+                        </td>
+
+                        <td>
+                            <p>Room Type：</p>
+                        </td>
+                        <td>
+                            <div id="rdoRoom">
+                                @Html.RadioButtonFor(m => m.RoomType, 0, new { @name = "roomtype", @id = "rdoKing" })<label for="rdoKing">King</label>
+                                @Html.RadioButtonFor(m => m.RoomType, 1, new { @name = "roomtype", @id = "rdoQueen" })<label for="rdoQueen">Queen</label>
+                                @Html.RadioButtonFor(m => m.RoomType, 2, new { @name = "roomtype", @id = "rdoPrincess" })<label for="rdoPrincess">Princess</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+                    </tr>
+                </table>
+            }
+
+            @using (Html.BeginForm("RoomStatusUpdate", "RoomStatus", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.OpertationStatus);   
+                
+                @Html.HiddenFor(m => m.Year);   
+                @Html.HiddenFor(m => m.Month);                
+                @Html.HiddenFor(m => m.RoomType);       
+                @Html.HiddenFor(m => m.ChooseDate, new { @id = "hiddenChooseDate" });       
+
+                <div class="pricepolicy">
+                    <p>请选择锁定的日期（可用ctrl选取多个日期）</p>
+
+                    <ol id="selectable1">
+                        <li class="ui-state-default">Monday</li>
+                        <li class="ui-state-default">Tuesday</li>
+                        <li class="ui-state-default">Wednesday</li>
+                        <li class="ui-state-default">Thursday</li>
+                        <li class="ui-state-default">Firday</li>
+                        <li class="ui-state-default">Saturday</li>
+                        <li class="ui-state-default">Sunday</li>
+                    </ol>
+
+
+                    <ol id="selectable">
+
+                        @{
+                                                                                    DateTime dt = new DateTime(Model.Year, Model.Month, 1);
+                                                                                    int days = Convert.ToInt32(dt.DayOfWeek);
+                                                                                    if (days == 0) { days = 7; }
+
+                                                                                    for (int i = 0; i < days - 1; i++)
+                                                                                    {
+                            <li>&nbsp;</li>
+                                                                                    }
+
+                                                                                    if (Model.OpertationStatus == AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add)
+                                                                                    {
+                                                                                        DateTime endDt = dt.AddMonths(1);
+                                                                                        for (DateTime start = dt; dt < endDt; dt = dt.AddDays(1))
+                                                                                        {
+                            <li class="ui-state-default" id="@dt.Day">@dt.Day</li>
+                                                                                        }
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        DateTime endDt = dt.AddMonths(1);
+                                                                                        string[] chooseList = Model.ChooseDate.Split(',');
+                                                                                        for (DateTime start = dt; dt < endDt; dt = dt.AddDays(1))
+                                                                                        {
+                                                                                            string[] isexist = Array.FindAll(chooseList, m => (m == dt.Day.ToString()));
+                                                                                            if (isexist.Length > 0)
+                                                                                            {
+                            <li class="ui-state-default ui-selectee ui-selected" id="@dt.Day">@dt.Day</li>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                            <li class="ui-state-default" id="@dt.Day">@dt.Day</li>
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                        }
+
+                    </ol>
+                </div>
+                
+        
+
+                <div class="pricepolicy" style="text-align: center">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Save" id="btnSave" onclick="return GetSelectedData();" />
+
+                </div>
+                <br />
+                
+               if(Model!=null)
+                    {
+                    if (Model.ResultStatus == (int)AFH.Barcaldine.Common.GlobalVariable.OrderStatus.Success)
+                    {
+                        <div>
+                              
+                            <span style="color:green; font-size:18px" id="spanmessage">@Model.ResultMsg</span>
+                        </div> 
+                    }
+                    else
+                    {
+                        <div>
+                         
+                            <span style="color:Red; font-size:18px" id="spanmessage">@Model.ResultMsg</span>
+                        </div>                    
+                    }
+                }
+           
+            }
+        </div>
+
+
+    </div>
+</div>

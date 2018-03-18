@@ -1,0 +1,182 @@
+﻿@model AFH.Barcaldine.Models.WineCategoryDetailModel
+
+@{
+    ViewBag.Title = "ProductCategory";
+}
+
+@*<h2>ProductCategory</h2>*@
+
+<script type="text/javascript" src="~/Scripts/plupload.js"></script>
+
+<script>
+    $(function () {
+        $("#btnSave").button();
+        $("#btnReturn").button();
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("WineCategoryDetail", "Wine", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.WineCategoryID);   
+                @Html.HiddenFor(m => m.OpertationStatus);     
+                @Html.HiddenFor(m => m.ImageUrl, new { id= "txtImageUrl"})
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1">English</a></li>
+                        <li><a href="#tabs-2">中文简体</a></li>
+                        <li><a href="#tabs-3">中文繁體</a></li>
+                    </ul>
+                    <div id="tabs-1">
+
+                        <table>
+                            <tr>
+                                <td style="width: 20%">
+                                    <p>Wine Category Name：</p>
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.WineCategoryName.English, null, new { @style = "width: 78%" })
+                                </td>
+
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div id="tabs-2">
+                        <table>
+                            <tr>
+                                <td style="width: 15%">
+                                    <p>酒类别名称：</p>
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.WineCategoryName.SimplifiedChinse, null, new { @style = "width: 80%" })
+                                </td>
+
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div id="tabs-3">
+                        <table>
+                            <tr>
+                                <td style="width: 15%">
+                                    <p>酒類別名稱：</p>
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.WineCategoryName.TraditionalChinse, null, new { @style = "width: 80%" })
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <td style="width:25%">
+                            <p>Is Delete：@Html.CheckBoxFor(m => m.IsDelete)</p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><p>Category Picture(Pixel: 153*344)：</p></td>
+                        <td>
+                            <div id="filelist"></div>
+                            <div id="container">
+                                <a id="pickfiles" href="javascript:;">[Select files]</a>
+                                <a id="uploadfiles" href="javascript:;">[Upload files]</a>
+                                <br />
+
+                                <img src ="@Model.ImageUrl" id="imgDetail" width ="153px" height="344px"/>
+                            </div>
+                            <div class="outputimages"></div>
+                            <pre id="console"></pre>
+                        </td>
+                    </tr>
+                </table>
+                
+
+                
+                
+                <div style="text-align: center">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Save" id="btnSave" />
+                    <button type="button" onclick="window.location.href='@Url.Action("WineCategoryList")'" id="btnReturn" >Return</button>
+                </div>                
+            }
+
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5,flash,silverlight,html4',
+            browse_button: 'pickfiles', // you can pass in id...
+            container: document.getElementById('container'), // ... or DOM Element itself
+            url: '@Url.Action("Upload","Upload")',
+        multi_selection: false,
+
+        filters: {
+            max_file_size: '10mb',
+            mime_types: [
+                { title: "Image files", extensions: "jpg,gif,png" },
+
+            ]
+        },
+
+        init: {
+            PostInit: function () {
+                document.getElementById('filelist').innerHTML = '';
+
+                document.getElementById('uploadfiles').onclick = function () {
+                    uploader.start();
+                    return false;
+                };
+            },
+
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
+                    if (up.files.length > 1) {
+                        up.removeFile(up.files[0]);
+                    }
+                    document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                });
+
+            },
+
+            UploadProgress: function (up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function (up, err) {
+                document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+
+            },
+
+
+
+            FileUploaded: function (uploader, file, responseObject) {
+                var url = responseObject.response;
+                url = url.replace(/\"/g, "");
+                $("#imgDetail").attr("src", url);
+                $("#txtImageUrl").val(url);
+            },
+
+
+        }
+    });
+
+    uploader.init();
+
+
+</script>

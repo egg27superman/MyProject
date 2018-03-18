@@ -1,0 +1,41 @@
+﻿@model AFH.Barcaldine.Models.MenuModule
+
+        <div class="Menu">
+
+                <ul id="Menu">
+
+                    @{
+                        int oldparentMenu = -1;
+                        for(int i=0;i < Model.Menus.Count;i++)
+                        {
+                            if(Model.Menus[i].ParentMenuID != oldparentMenu)
+                            {
+                                oldparentMenu = Model.Menus[i].ParentMenuID;
+                                AFH.Barcaldine.Models.MenuDetailModule parentMenuDetail = Model.ParentMenus.Find(m=>m.MenuID == Model.Menus[i].ParentMenuID);
+                                if(parentMenuDetail!=null)
+                                {
+                                    <li class="ui-widget-header">@parentMenuDetail.MenuName</li>
+                                }
+                                
+                            }
+                            <li>@Html.ActionLink(Model.Menus[i].MenuName, Model.Menus[i].ActionName, Model.Menus[i].ControllerName)</li>
+                        }
+                    }
+@*                    <li class="ui-widget-header">OrderList</li>
+                    <li>@Html.ActionLink("Order List", "OrderList", "Order")</li>
+                    <li>@Html.ActionLink("Fault Order List", "FaultOrderList", "Order")</li>
+                    
+                    <li class="ui-widget-header">Room Setting</li>
+                    
+                    <li>@Html.ActionLink("Room Basic Rate", "RoomRateList", "RoomRate")</li>
+                    <li>@Html.ActionLink("Room Rate Policy", "RatePolicyList", "RoomRate")</li>
+                    <li>@Html.ActionLink("Room Status", "RoomStatus", "RoomStatus")</li>
+                    
+                    <li class="ui-widget-header">Wine Setting</li>
+                    <li>@Html.ActionLink("Wine Category", "WineCategoryList", "Wine")</li>
+                    <li>@Html.ActionLink("Wine Product", "ProductList", "Wine")</li>
+                    <li>@Html.ActionLink("Shipping", "ShippingList", "Wine")</li>*@
+
+
+                </ul>
+            </div>

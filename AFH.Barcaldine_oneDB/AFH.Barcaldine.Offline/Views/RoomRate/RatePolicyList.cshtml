@@ -1,0 +1,89 @@
+﻿@model AFH.Barcaldine.Models.RatePolicyListModel
+@{
+    ViewBag.Title = "PricePolicyList";
+}
+
+
+<script>
+    $(function () {
+        $("#btnSearch").button();
+        //$.datepicker.setDefaults({
+        //    dateFormat: 'dd/mm/yy',
+        //    minDate: "-1y",
+        //    maxDate: "+1y"
+        //})
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("RatePolicyList", "RoomRate", FormMethod.Post))
+            {
+                
+
+                <table>
+                    <tr>
+                        <td>
+                            <p>Start Date: </p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.RatePolicySearch.StartDateFrom, null, new { @class = "datepicker" }) ~ @Html.TextBoxFor(m => m.RatePolicySearch.StartDateTo, null, new { @class = "datepicker" })
+                        </td>
+                        <td>
+                            <p>End Date: </p>
+                        </td>
+                        <td>@Html.TextBoxFor(m => m.RatePolicySearch.EndDateFrom, null, new { @class = "datepicker" }) ~ @Html.TextBoxFor(m => m.RatePolicySearch.EndDateTo, null, new { @class = "datepicker" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Room Type: </p>
+                        </td>
+                        <td>@Html.DropDownListFor(m => m.RatePolicySearch.RoomType, Model.RatePolicySearch.GetRoomTypeList())</td>
+                        <td>
+                            <p>Is Delete:</p>
+                        </td>
+                        <td>@Html.DropDownListFor(m => m.RatePolicySearch.IsDelete, Model.RatePolicySearch.GetIsDeleteSelectList())</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+
+            <br />
+            @Html.ActionLink("ADD New Room Policy", "RatePolicyDetail", "RoomRate", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add, id = string.Empty }, null)
+
+            <table class="tableClass">
+                <tr>
+                    <th>Room Policy ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>RoomType</th>
+                    <th>Is Delete</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.RatePolicyResultModel myModel in Model.RatePolicyResult)
+                {
+                    <tr>
+                        <td>@myModel.RoomPolicyID</td>
+                        <td>@Convert.ToDateTime(myModel.StartDate).ToString("dd/MM/yyyy")</td>
+                        <td>@Convert.ToDateTime(myModel.EndDate).ToString("dd/MM/yyyy")</td>
+                        <td>@myModel.RoomTypeName</td>
+                        <td>@myModel.IsDelete</td>
+                        <td>@Html.ActionLink("Update", "RatePolicyDetail", "RoomRate", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update, id = myModel.RoomPolicyID }, null)</td>
+                    </tr>
+                }
+            </table>
+
+
+
+        </div>
+    </div>
+</div>

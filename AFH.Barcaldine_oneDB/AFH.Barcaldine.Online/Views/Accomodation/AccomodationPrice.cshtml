@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "AccomodationPrice";
+}
+
+
+
+ <div class="wrap" id="content">
+     <div class="content content-type-page" id="cid-4">
+         <div class="production-tpl">
+            <div class="production-bg">
+             <table>
+           
+              <tbody>
+                <tr>
+                  <td>King room weekday</td>
+                  <td>$279 AUD</td>
+                </tr>
+                <tr>
+                  <td>king room weekend</td>
+                  <td>$379 AUD</td>
+                </tr>
+                <tr>
+                  <td>Queen room weekday</td>
+                  <td>$229 AUD</td>
+                </tr>
+                <tr>
+                  <td>Queen room weekend</td>
+                  <td>$329 AUD</td>
+                </tr>
+                <tr>
+                  <td>Princess room weekday</td>
+                  <td>$229 AUD</td>
+                </tr>
+               
+                <tr>
+                  <td>Princess room weekend</td>
+                  <td>$329 AUD</td>
+                </tr>
+                
+                  <td><a href="@Url.Action("AccomodationOrder","Accomodation")" title="Barcaldine Country House king queen room" class="transition-1"><font style="font-weight:bold;font-style:italic;"><u>Check availability&amp;Booking</u></font> </a></td>
+                  
+                </tr>
+              </tbody>
+            
+            </table>
+             <br />
+             <br />
+                <section class="block iota-block">
+
+    <article class="transition-05">
+  <div class="left">
+    <div class="text">
+      <h2><span>Barcaldine Country House:</span> Cooking Classes</h2>
+      <table><tbody><tr><td>
+At Barcaldine Country House we can provide many different cooking classes consisting of a 3 course Italian meal, the preperation for each course, the art of cooking each course, how to set the table and sit down to enjoy the meal with the perfect wine.
+</td>
+<td>
+This is a truly memorable experience and can be enjoyed by singles in a group, couples, groups of friends or even families. Not only will you get to enjoy a fabulous meal that you have enjoyed preparing with Rosemarie, but you will take away with you a lifetimes' experience in kitchen and food preparation skills that will enhance your own.
+
+</td></tr></tbody></table>
+
+    </div>
+    
+  </div>
+  <div class="right">
+    <img src="../images/production.jpg" alt="<span>Growing:</span> February - June" />
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="left">
+    <div class="text">
+      <h2><span>Barcaldine Country House:</span> Family Room</h2>
+      <table><tbody><tr><td>
+What a wonderful open spacious part of the Country House to just 'lounge around' and relax, read the daily paper, watch television, or just chat and relax with friends.  
+</td><td>
+ Breakfast and dinner is served here, with a television area for relaxing, a double sided fire place and a mid-sized grand piano available to play if you are handy on a keyboard.  
+
+</td></tr></tbody></table>
+    </div>
+    
+  </div>
+  <div class="right">
+    <img src="../images/harvest.jpg" alt="<span>Harvest:</span> June - July" />
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="left">
+    <div class="text">
+      <h2><span>Barcaldine Country House:</span> What Our Guests Say!</h2>
+      <table><tbody><tr><td>
+First class accomodation a warm relaxed atmosphere. Rose and Frank are great host and well appointed rooms and the surrounding grounds and vine yards / cellar make the stay very enjoable. We will be back.
+</td>
+<td>
+Our first experience at a B & B. The house is gorgeous, gardens beautiful and they don't make a bad drop of wine either! We had a lovely time with Frank & Rosemarie, when we left it felt like we were saying goodbye to old friends... we will be back!  
+
+</td></tr></tbody></table>
+
+    </div>
+    
+  </div>
+  <div class="right">
+    <img src="../images/destilation.jpg" alt="<span>destilation:</span> July-Augest" />
+  </div>
+
+</article>
+<article class="transition-05">
+  <div class="left">
+    <div class="text">
+      <h2><span>Barcaldine Country House:</span> The Accommodation</h2>
+      <table><tbody><tr><td>
+Barcaldine Country House has 3 types of luxurious rooms for your special escape. Whether it be a romantic weekend or a small corporate retreat, Barcaldine Country House rooms are all spacious and luxuriously appointed.
+</td>
+<td>
+
+The large King Rooms have a queen size bed and two single beds to accommodate a total of 4 people. Great for a family weekend escape or a 'girls weekend away'
+</td></tr></tbody></table>
+    </div>
+    
+  </div>
+  <div class="right">
+    <img src="../images/conserving.jpg" alt="<span>Conserving:</span> September - December" />
+  </div>
+
+</article>
+<script>
+    (function ($) {
+        var interval, timeout;
+        $(document).ready(function () {
+            $('section.iota-block article').each(function (i) {
+                var _ = $('<label class="label-' + i + '"><div class="lbl"></div></label>').click(function () {
+                    clearInterval(interval);
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function () {
+                        cont();
+                    }, 5000);
+                    show($(this));
+                });
+                $('#iota-labels').append(_);
+            });
+            show($('#iota-labels label:first'));
+            cont();
+        });
+
+        function show(el) {
+            var i = $('#iota-labels label').index(el);
+            $('section.iota-block article.active').removeClass('active');
+            $('section.iota-block article:eq(' + i + ')').addClass('active');
+            $('#iota-labels label.active').removeClass('active');
+            el.addClass('active');
+        }
+
+        function cont() {
+            clearInterval(interval);
+            interval = setInterval(function () {
+                var _ = $('#iota-labels label.active').next();
+                if (_.length < 1) _ = $('#iota-labels label:first');
+                show(_);
+            }, 5000);
+        }
+
+
+    })(jQuery);
+</script>
+
+  </section>
+                <div id="iota-labels"></div>
+
+                <!-- div for production_bg -->
+             </div>
+
+    
+
+         </div>
+       </div>
+     </div>
+
+          
+

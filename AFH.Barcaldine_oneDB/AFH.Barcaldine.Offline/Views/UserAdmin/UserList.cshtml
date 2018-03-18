@@ -1,0 +1,51 @@
+﻿@model AFH.Barcaldine.Models.UserListModule
+@{
+    ViewBag.Title = "UserList";
+    
+}
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("UserList", "UserAdmin", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <th>User ID:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.UserSearch.UserID)
+                        </td>
+                        <th>User Name:
+                        </th>
+                        <td>@Html.TextBoxFor(m => m.UserSearch.UserName)</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <input type="submit" value="Search" /></td>
+                    </tr>
+                </table>              
+            }
+            @Html.ActionLink("ADD PRIVILEGE", "UserPrivilege", "UserAdmin", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add, id=string.Empty}, null)
+            <table class="tableClass">
+                <tr>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.UserResultListModule myModel in Model.UserResultList)
+                {
+                    <tr>
+                        <td>@myModel.UserID</td>
+                        <td>@myModel.UserName</td>
+                        <td>@Html.ActionLink("Update", "UserPrivilege", "UserAdmin",  new { opertation =   AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update, id=myModel.UserID}, null)</td>
+                    </tr>
+                }
+            </table>
+            <br />
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+

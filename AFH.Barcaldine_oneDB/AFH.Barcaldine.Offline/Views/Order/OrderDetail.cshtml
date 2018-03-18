@@ -1,0 +1,487 @@
+﻿@model AFH.Barcaldine.Models.OrderDetailModel
+@{
+    ViewBag.Title = "OrderDetail";
+}
+
+
+<script>
+    $(function () {
+        $("#btnDelete").button();
+        $("#btnReturn").button();
+        $("#btnReCreateInvoice").button();
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            <div class="orderinfo">
+                <div class="orderdetail">
+                    <h1>Order Information</h1>
+                    <table>
+                        <tr>
+                            <td>
+                                <p>Order NO:</p>
+                            </td>
+                            @if (Model.ProcessType == (int)AFH.Barcaldine.Common.GlobalVariable.ProcessType.Online
+                              && Model.OrderStatus == (int)AFH.Barcaldine.Common.GlobalVariable.OrderStatus.Success)
+                            {
+                                <td>
+                                    <p><a target="_blank" href="@(System.Configuration.ConfigurationManager.AppSettings["PDFDownload"].ToString() + Model.OrderNo + ".pdf")">@Model.OrderNo</a></p>
+                                </td>                               
+                            }
+                            else
+                            {
+                                <td>
+                                    <p>@Model.OrderNo</p>
+                                </td>
+                            }
+                            <td>
+                                <p>Order Type:</p>
+                            </td>
+                            <td>
+                                <p>@Model.OrderTypeName:</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Process Type:</p>
+                            </td>
+                            <td>
+                                <p>@Model.ProcessTypeName</p>
+                            </td>
+                            <td>
+                                <p>Order Date:</p>
+                            </td>
+                            <td>
+                                <p>@Model.OrderDate.ToString("dd/MM/yyyy")</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Order Status:</p>
+                            </td>
+                            <td>
+                                <p>@Model.OrderStatusName</p>
+                            </td>
+                            <td>
+                                <p>Order Desc:</p>
+                            </td>
+                            <td>
+                                <p>@Model.OrderDesc</p>
+                            </td>
+                        </tr>
+                        @if (Model.OrderType == (int)AFH.Barcaldine.Common.GlobalVariable.OrderType.Room)
+                        {
+                            if (Model.RoomOrderDetail != null && Model.RoomOrderDetail.Count > 0)
+                            {
+                            <tr>
+                                <td>
+                                    <p>Adult Count:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.RoomOrderDetail[0].AdultCount</p>
+                                </td>
+                                <td>
+                                    <p>Kid Count:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.RoomOrderDetail[0].KidsCount</p>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <p>Special Request:</p>
+                                </td>
+                                <td colspan="3">
+                                    <p>@Model.RoomOrderDetail[0].AdditionalDetail</p>
+                                </td>
+                            </tr>                                                              
+                            }
+                        }
+                    </table>
+                    @if (Model.OrderType == (int)AFH.Barcaldine.Common.GlobalVariable.OrderType.Room)
+                    {
+
+                        <table class="tableClass">
+                            <tr>
+                                <th>
+                                    <p>Room Type</p>
+                                </th>
+                                <th>
+                                    <p>Check-in</p>
+                                </th>
+                                <th>
+                                    <p>Check-out</p>
+                                </th>
+                                <th>
+                                    <p>Price</p>
+                                </th>
+                                <th>
+                                    <p>Discount</p>
+                                </th>
+                                <th>
+                                    <p>Quantity</p>
+                                </th>
+                                <th>
+                                    <p>TotalPrice</p>
+                                </th>
+                            </tr>
+                            @foreach (AFH.Barcaldine.Models.RoomOrderDetailModel detail in Model.RoomOrderDetail)
+                            {
+                                <tr>
+                                    <td>
+                                        <p>@detail.RoomType</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.CheckinDate.ToString("dd/MM/yyyy")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.CheckoutDate.ToString("dd/MM/yyyy")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Price.ToString("#,###,##0.00")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Discount.ToString("#,###,##0.00")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Quantity.ToString("0")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.TotalPrice.ToString("#,###,##0.00")</p>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td>
+                                    <p>Original Price</p>
+                                </td>
+                                <td colspan="6">
+                                    <p>@Model.OriginalPrice.ToString("#,###,##0.00")</p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Discount</p>
+                                </td>
+                                <td colspan="6">
+                                    <p>@Model.Discount.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Shipping</p>
+                                </td>
+                                <td colspan="6">
+                                    <p>@Model.Shipping.ToString("#,###,##0.00")</p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Tax</p>
+                                </td>
+                                <td colspan="6">
+                                    <p>@Model.Tax.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>TotalPrice</p>
+                                </td>
+                                <td colspan="6">
+                                    <p>@Model.TotalPrice.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                        </table>
+                            
+                    }
+                    else
+                    {
+
+                        <table class="tableClass">
+                            <tr>
+                                <th>
+                                    <p>Wine Name</p>
+                                </th>
+                                <th>
+                                    <p>Quantity</p>
+                                </th>
+                                <th>
+                                    <p>Price</p>
+                                </th>
+                                <th>
+                                    <p>Discount</p>
+                                </th>
+                                <th>
+                                    <p>TotalPrice</p>
+                                </th>
+                            </tr>
+
+                            @foreach (AFH.Barcaldine.Models.WineOrderDetailModel detail in Model.WineOrderDetail)
+                            {
+                                <tr>
+                                    <td>
+                                        <p>@detail.WineName</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Quantity</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Price.ToString("#,###,##0.00")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.Discount.ToString("#,###,##0.00")</p>
+                                    </td>
+                                    <td>
+                                        <p>@detail.TotalPrice.ToString("#,###,##0.00")</p>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td>
+                                    <p>Original Price</p>
+                                </td>
+                                <td colspan="5">
+                                    <p>@Model.OriginalPrice.ToString("#,###,##0.00")</p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Discount</p>
+                                </td>
+                                <td colspan="5">
+                                    <p>@Model.Discount.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Shipping</p>
+                                </td>
+                                <td colspan="5">
+                                    <p>@Model.Shipping.ToString("#,###,##0.00")</p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Tax</p>
+                                </td>
+                                <td colspan="5">
+                                    <p>@Model.Tax.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>TotalPrice</p>
+                                </td>
+                                <td colspan="5">
+                                    <p>@Model.TotalPrice.ToString("#,###,##0.00")</p>
+                                </td>
+                            </tr>
+                        </table>                            
+                    }
+
+                </div>
+
+                @if (Model.Customer != null)
+                {
+                    <div class="orderdetail">
+                        <h1>Customer Detail</h1>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Name:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.Customer.Name</p>
+                                </td>
+                                <td>
+                                    <p>Phone:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.Customer.Phone</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Email:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.Customer.Email</p>
+                                </td>
+                                <td>
+                                    <p>Birthday:</p>
+                                </td>
+                                <td>
+                                    @if (Model.Customer.Birthday != null)
+                                    {
+                                        <p>@Convert.ToDateTime(Model.Customer.Birthday).ToString("dd/MM/yyyy")</p>
+                                    }
+                                    else
+                                    {<p></p>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Address:</p>
+                                </td>
+                                <td colspan="3">
+                                    <p>@Model.Customer.Address</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>State:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.Customer.State</p>
+                                </td>
+                                <td>
+                                    <p>PostCode:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.Customer.PostCode</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+                @if (Model.OrderStatusName != null)
+                {
+                    <div class="orderdetail">
+                        <h1>Payment Transaction</h1>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Request ID:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.PaymentTransaction.RequestID</p>
+                                </td>
+                                <td>
+                                    <p>Response ID:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.PaymentTransaction.ResponseID</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Response Status:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.PaymentTransaction.ResponseStatus</p>
+                                </td>
+                                <td>
+                                    <p>Response Message:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.PaymentTransaction.ResponseMsg</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+
+                <div class="orderdetail">
+                    <h1>Process Log</h1>
+                    <br />
+                    <table class="tableClass">
+                        <tr>
+                            <th>
+                                <p>LogTime</p>
+                            </th>
+                            <th>
+                                <p>System</p>
+                            </th>
+                            <th>
+                                <p>Model</p>
+                            </th>
+                            <th>
+                                <p>LogContent</p>
+                            </th>
+                            <th>
+                                <p>ErrorMessage</p>
+                            </th>
+                        </tr>
+                        @foreach (AFH.Barcaldine.Models.LogModel logDetail in Model.Log)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@logDetail.LogTime.ToString()</p>
+                                </td>
+                                <td>
+                                    <p>@logDetail.System</p>
+                                </td>
+                                <td>
+                                    <p>@logDetail.SystemModel</p>
+                                </td>
+                                <td>
+                                    <p>@logDetail.LogContent</p>
+                                </td>
+                                <td>
+                                    <p>@logDetail.ErrorMessage</p>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+
+                @if (Model.SourceFrom == "FaultOrderList")
+                {
+                    <div class="orderdetail">
+                        <h1>Fault Information</h1>
+                        <br />
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Fault Message:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.FaultOrder.FaultMessage</p>
+                                </td>
+                                <td>
+                                    <p>Is Delete:</p>
+                                </td>
+                                <td>
+                                    <p>@Model.FaultOrder.IsDelete</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    @using (Html.BeginForm("DeleteFaultOrder", "Order", new { orderID = Model.OrderID }, FormMethod.Post))
+                                    {
+                                        <input type="submit" value="Delete From Fault" id="btnDelete" />
+
+                                    }
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                }
+
+
+                <div class="orderdetail">
+                    @if (Model.SourceFrom == "FaultOrderList")
+                    {
+                        <button type="button" onclick="window.location.href='@Url.Action("FaultOrderList")'" id="btnReturn" >Return</button>
+                    }
+                    else
+                    {
+                        <button type="button" onclick="window.location.href='@Url.Action("OrderList")'" id="btnReturn" >Return</button>                        
+                    }
+                </div>
+            </div>
+
+            <br />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "RoomState";
+}
+
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
+
+    #selectable .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectable .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 850px;
+    }
+
+        #selectable li {
+            margin: 3px;
+            padding: 1px;
+            float: left;
+            width: 100px;
+            height: 80px;
+            font-size: 4em;
+            text-align: center;
+        }
+
+    #selectable1 li {
+        margin: 3px;
+        padding: 1px;
+        float: left;
+        width: 100px;
+        height: 20px;
+        font-size: 1em;
+        text-align: center;
+    }
+</style>
+<script>
+    $(function () {
+        $("#selectable").selectable();
+        $("#cmbYear").selectmenu();
+        $("#cmbMonth").selectmenu();
+        $("#rdoRoom").buttonset();
+        $("#btnSearch").button();
+        $("#btnSave").button();
+        $("#btnReturn").button();
+    });
+</script>
+
+@*<h2>RoomState</h2>*@
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+
+
+            <div id="rdoRoom">
+
+                <p>
+                    房间类型：
+                    <input type="radio" name="rdoBasic" id="rdoKing" /><label for="rdoKing">King</label>
+                    <input type="radio" name="rdoBasic" id="rdoQueen" /><label for="rdoQueen">Queen</label>
+                    <input type="radio" name="rdoBasic" id="rdoPrincess" /><label for="rdoPrincess">Princess</label>
+                </p>
+            </div>
+
+            <div class="pricepolicy">
+                <p>
+                    <select id="cmbYear" style="width: 100px">
+                        <option value="2014">2014年</option>
+                        <option value="2015">2015年</option>
+                    </select>
+                    <select id="cmbMonth" style="width: 100px">
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="3">3月</option>
+                        <option value="4">4月</option>
+                        <option value="5">5月</option>
+                        <option value="6">6月</option>
+                        <option value="7">7月</option>
+                        <option value="8">8月</option>
+                        <option value="9">9月</option>
+                        <option value="10">10月</option>
+                        <option value="11">11月</option>
+                        <option value="12">12月</option>
+                    </select>
+
+                    @*<input type="submit" value="Search" id="btnSearch" />*@
+                </p>
+            </div>
+
+
+
+
+
+
+            <div class="pricepolicy">
+                <p>请选择锁定的日期（可用ctrl选取多个日期）</p>
+
+                <ol id="selectable1">
+                    <li class="ui-state-default">周一</li>
+                    <li class="ui-state-default">周二</li>
+                    <li class="ui-state-default">周三</li>
+                    <li class="ui-state-default">周四</li>
+                    <li class="ui-state-default">周五</li>
+                    <li class="ui-state-default">周六</li>
+                    <li class="ui-state-default">周日</li>
+                </ol>
+
+                <ol id="selectable">
+                    <li class="ui-state-default"></li>
+                    <li class="ui-state-default"></li>
+                    <li class="ui-state-default"></li>
+                    <li class="ui-state-default">1</li>
+                    <li class="ui-state-default">2</li>
+                    <li class="ui-state-default">3</li>
+                    <li class="ui-state-default">4</li>
+                    <li class="ui-state-default">5</li>
+                    <li class="ui-state-default">6</li>
+                    <li class="ui-state-default">7</li>
+                    <li class="ui-state-default">8</li>
+                    <li class="ui-state-default">9</li>
+                    <li class="ui-state-default">10</li>
+                    <li class="ui-state-default">11</li>
+                    <li class="ui-state-default">12</li>
+                    <li class="ui-state-default">13</li>
+                    <li class="ui-state-default">14</li>
+                    <li class="ui-state-default">15</li>
+                    <li class="ui-state-default">16</li>
+                    <li class="ui-state-default">17</li>
+                    <li class="ui-state-default">18</li>
+                    <li class="ui-state-default">19</li>
+                    <li class="ui-state-default">20</li>
+                    <li class="ui-state-default">21</li>
+                    <li class="ui-state-default">22</li>
+                    <li class="ui-state-default">23</li>
+                    <li class="ui-state-default">24</li>
+                    <li class="ui-state-default">25</li>
+                    <li class="ui-state-default">26</li>
+                    <li class="ui-state-default">27</li>
+                    <li class="ui-state-default">28</li>
+                    <li class="ui-state-default">29</li>
+                    <li class="ui-state-default">30</li>
+                    <li class="ui-state-default">31</li>
+
+                </ol>
+            </div>
+
+            <div class="pricepolicy" style="text-align:center">
+                <br /><br /><br />
+                        <input type="submit" value="Save" id="btnSave"/>
+                        <input type="submit" value="Return" id="btnReturn"/>
+
+            </div>
+
+        </div>
+    </div>
+</div>

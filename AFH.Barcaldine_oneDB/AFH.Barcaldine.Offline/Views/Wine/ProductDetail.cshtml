@@ -1,0 +1,310 @@
+﻿@model AFH.Barcaldine.Models.ProductDetailModel
+@{
+    ViewBag.Title = "Product";
+}
+
+<script type="text/javascript" src="~/Scripts/plupload.js"></script>
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+        $("#spinner").spinner({
+            min: 1
+        });
+
+        $("#txtProductYear").spinner({
+            min: 1900,
+            max: 2100
+        });
+
+        $("#btnSave").button();
+        $("#btnReturn").button();
+    });
+</script>
+
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("ProductDetail", "Wine", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true);
+
+                @Html.HiddenFor(m => m.WineID);   
+                @Html.HiddenFor(m => m.OpertationStatus);     
+                
+                  
+                @Html.HiddenFor(m => m.WineImages[0].Url, new { id= "txtListImage"})
+                @Html.HiddenFor(m => m.WineImages[0].ImageType)
+                @Html.HiddenFor(m => m.WineImages[1].Url, new { id= "txtDetailImage"})
+                @Html.HiddenFor(m => m.WineImages[1].ImageType)
+
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-@AFH.Barcaldine.Common.GlobalVariable.LanguageName.English">English</a></li>
+                        <li><a href="#tabs-@AFH.Barcaldine.Common.GlobalVariable.LanguageName.SimplifiedChinese">中文简体</a></li>
+                        <li><a href="#tabs-@AFH.Barcaldine.Common.GlobalVariable.LanguageName.TraditionalChinese">中文繁體</a></li>
+                    </ul>
+                    @for (int i = 0; i < Model.Describle.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.Describle[i].Language)  
+                                        
+                        <div id="tabs-@Model.Describle[i].Language">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p>Wine Name：</p>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Describle[i].DescribleDetail.Name)
+                                        <br />
+                                        @Html.ValidationMessageFor(m => m.Describle[i].DescribleDetail.Name)
+                                    </td>
+                                    <td>
+                                        <p>Wine short introduction：</p>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Describle[i].DescribleDetail.ShortIntro)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top">
+                                        <p>Wine Describle：</p>
+                                    </td>
+                                    <td colspan="3">
+                                        @Html.TextAreaFor(m => m.Describle[i].DescribleDetail.Desc, new { @style = "width:90%" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>                                        
+                                        
+                                        
+                    }
+
+                </div>
+
+                <table>
+                    <tr>
+                        <td>
+                            <p>Wine category：</p>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.WineCategoryID, Model.GetWineCategoryList, null, new { @style = "width:200px" })
+                        </td>
+                        <td>
+                            <p>Price：</p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Price, null, new { @id = "spinner" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Price)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                Region:<p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.Region)
+                        </td>
+                        <td>
+                            <p>Year：</p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.ProductYear, null, new { @id = "txtProductYear" })
+                            <br />
+                            @Html.ValidationMessageFor(m => m.ProductYear)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>List Picture(Pixel: 55*194)：</p>
+                        </td>
+                        <td colspan="3">
+                            <div id="filelist"></div>
+                            <div id="container">
+                                <a id="pickfiles" href="javascript:;">[Select files]</a>
+                                <a id="uploadfiles" href="javascript:;">[Upload files]</a>
+                                <br />
+                                @*<img src ="@Model.ListImage" id="imgList" width ="55px" height="194px"/>*@
+                                <img src ="@Model.WineImages[0].Url" id="imgList" width ="55px" height="194px"/>
+                            </div>
+                            <pre id="console"></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Detail Picture(Pixel: 202*651)：</p>
+                        </td>
+                        <td colspan="3">
+                            <div id="filelist2"></div>
+                            <div id="container2">
+                                <a id="pickfiles2" href="javascript:;">[Select files]</a>
+                                <a id="uploadfiles2" href="javascript:;">[Upload files]</a>
+                                <br />
+                                @*<img src ="@Model.DetailImage" id="imgDetail" width ="202px" height="651px"/>*@
+                                <img src ="@Model.WineImages[1].Url" id="imgDetail" width ="202px" height="651px"/>
+                            </div>
+                            <div class="outputimages"></div>
+                            <pre id="console2"></pre>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Is Delete：</p>
+                        </td>
+                        <td colspan="3">
+                            @Html.CheckBoxFor(m => m.IsDelete)</td>
+                    </tr>
+                </table>
+
+                <div style="text-align: center">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Save" id="btnSave" />
+                    <button type="button" onclick="window.location.href='@Url.Action("ProductList")'" id="btnReturn" >Return</button>  
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+@*<script type="text/javascript" src="~/Scripts/productdetailplup.js"></script>*@
+
+    <script type="text/javascript">
+        
+    // Custom example logic
+    
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'pickfiles', // you can pass in id...
+        container: document.getElementById('container'), // ... or DOM Element itself
+        url: '@Url.Action("Upload","Upload")',
+        //flash_swf_url: '../js/Moxie.swf',
+        //silverlight_xap_url: '../js/Moxie.xap',
+        multi_selection: false,
+
+        filters: {
+            max_file_size: '10mb',
+            mime_types: [
+                { title: "Image files", extensions: "jpg,gif,png" },
+                
+            ]
+        },
+
+        init: {
+            PostInit: function () {
+                document.getElementById('filelist').innerHTML = '';
+
+                document.getElementById('uploadfiles').onclick = function () {
+                    uploader.start();
+                    return false;
+                };
+            },
+
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
+                    if (up.files.length > 1) {
+                        up.removeFile(up.files[0]);
+                    }
+                    document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                });
+
+            },
+
+            UploadProgress: function (up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function (up, err) {
+                document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+
+            },
+
+
+
+            FileUploaded: function (uploader, file, responseObject) {
+                var url = responseObject.response;
+                url = url.replace(/\"/g, "");
+                $("#imgList").attr("src", url);
+                $("#txtListImage").val(url);
+            },
+
+
+        }
+    });
+
+uploader.init();
+
+
+</script>
+
+    <script type="text/javascript">
+    // Custom example logic
+
+    var uploader2 = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'pickfiles2', // you can pass in id...
+        container: document.getElementById('container2'), // ... or DOM Element itself
+        url: '@Url.Action("Upload","Upload")',
+        //flash_swf_url: '../js/Moxie.swf',
+        //silverlight_xap_url: '../js/Moxie.xap',
+        multi_selection: false,
+
+        filters: {
+            max_file_size: '10mb',
+            mime_types: [
+                { title: "Image files", extensions: "jpg,gif,png" }
+                
+            ]
+        },
+
+        init: {
+            PostInit: function () {
+                document.getElementById('filelist2').innerHTML = '';
+
+                document.getElementById('uploadfiles2').onclick = function () {
+                    uploader2.start();
+                    return false;
+                };
+            },
+
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
+                    if (up.files.length > 1) {
+                        up.removeFile(up.files[0]);
+                    }
+                    document.getElementById('filelist2').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                });
+
+            },
+
+            UploadProgress: function (up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function (up, err) {
+                document.getElementById('console2').innerHTML += "\nError #" + err.code + ": " + err.message;
+
+            },
+
+            FileUploaded: function (uploader, file, responseObject) {
+                var url = responseObject.response;
+                url = url.replace(/\"/g, "");
+                $("#imgDetail").attr("src", url);
+                $("#txtDetailImage").val(url);
+            }
+        }
+    });
+
+uploader2.init();
+
+</script>
+
+

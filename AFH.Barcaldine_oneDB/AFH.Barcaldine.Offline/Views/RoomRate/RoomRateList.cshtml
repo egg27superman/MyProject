@@ -1,0 +1,72 @@
+﻿@model AFH.Barcaldine.Models.RoomRateListModel
+@{
+    ViewBag.Title = "PriceRateList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#btnSearch").button();
+    });
+</script>
+
+<div class="Services_content">
+    <div class="grid2">
+        <div class="contact_form">
+            @using (Html.BeginForm("RoomRateList", "RoomRate", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            <p>Rate Name: </p>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.RoomRateSearch.RateName)
+                        </td>
+                        <td>
+                            <p>Rate Type: </p>
+                        </td>
+                        <td>@Html.DropDownListFor(m => m.RoomRateSearch.RateType, Model.RoomRateSearch.GetRateTypeList())</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Is Delete:</p>
+                        </td>
+                        <td>@Html.DropDownListFor(m => m.RoomRateSearch.IsDelete, Model.RoomRateSearch.GetIsDeleteSelectList())</td>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Search" id="btnSearch" /></td>
+
+                    </tr>
+                </table>
+            }
+
+            <br />
+            @Html.ActionLink("ADD New Room Rate", "RoomRateDetail", "RoomRate", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Add, id = string.Empty }, null)
+
+
+            <table class="tableClass">
+                <tr>
+                    <th>Room Rate ID</th>
+                    <th>Rate Name</th>
+                    <th>Rate Type</th>
+                    <th>Is Delete</th>
+                    <th>Operate</th>
+                </tr>
+                @foreach (AFH.Barcaldine.Models.RoomRateResultModel myModel in Model.RoomRateResult)
+                {
+                    <tr>
+                        <td>@myModel.RoomRateID</td>
+                        <td>@myModel.RateName</td>
+                        <td>@myModel.RateTypeName</td>
+                        <td>@myModel.IsDelete</td>
+                        <td>@Html.ActionLink("Update", "RoomRateDetail", "RoomRate", new { opertation = AFH.Barcaldine.Common.GlobalVariable.UpdateStatus.Update, id = myModel.RoomRateID }, null)</td>
+                    </tr>
+                }
+            </table>
+
+
+        </div>
+    </div>
+</div>
+

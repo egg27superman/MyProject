@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Barcaldine Country House - Daylesford </title>
+        <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon"/>
+
+        <meta name="viewport" content="width=device-width" />
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic" media="screen" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
+    </head>
+    <body>
+
+    <div id="full">
+        <div id="theme-ajax-loader">
+            <!-- theme-ajax-loader -->
+            <div id="page">
+                <div id="whine-stain"></div>
+                <div id="page-header">
+                    <a id="logo" href="@Url.Action("IndexPage","Index")" title="Cheers: Premium Theme"></a>
+
+                    <div class="language-select"></div>
+                </div>
+                <nav id="menu" class="nui-edit nui-menu">
+                    <ul class="level-0">
+                        <li>
+                            <a href="@Url.Action("CafePage","Cafe")" title="Find out who we are" class="transition-1">
+                                <span class="title">Café &amp; Cellar Door</span>
+
+                                <span class="line transition-05"></span>
+
+                                <span class="triangle"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("WineList","Wine")" title="Barcaldine Country House wine" class="transition-1">
+                                <span class="title">Wines</span>
+
+                                <span class="line transition-05"></span>
+
+                                <span class="triangle"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("AccomodationPrice","Accomodation")" title="Barcaldine Country House king queen room" class="transition-1">
+                                <span class="title">Accomodation</span>
+
+                                <span class="line transition-05"></span>
+
+                                <span class="triangle"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ContactPage","Contact")" title="Where to find our wines" class="transition-1">
+                                <span class="title">Contact</span>
+
+                                <span class="line transition-05"></span>
+
+                                <span class="triangle"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="wrap" id="content">
+                    @RenderBody()
+                    
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!-- /theme-ajax-loader -->
+        <br />
+        <br />
+        <div id="footer">
+            @*<div class="white-footer"></div>*@
+            <div class="dark-footer">
+                <div class="wrap">
+                    <div class="left">Copyright © 2015, Barcaldine Country House<a href="#" title="" target="_blank"></a></div>
+                    <div class="right">Privacy Terms & Conditions</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
